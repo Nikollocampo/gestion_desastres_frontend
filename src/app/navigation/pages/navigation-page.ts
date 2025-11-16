@@ -5,6 +5,7 @@ import { Menu } from '../components/menu/menu';
 
 @Component({
   selector: 'app-navigation-page',
+  standalone: true,
   imports: [Footer, Header, Menu],
   templateUrl: './navigation-page.html',
   styleUrl: './navigation-page.css',

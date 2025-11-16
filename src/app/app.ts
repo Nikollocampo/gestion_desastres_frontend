@@ -1,10 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavigationPage } from './navigation/pages/navigation-page';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavigationPage],
+  standalone: true,
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
