@@ -1,0 +1,30 @@
+/* Mejor organización y visualización del menú lateral */
+.menu {
+  background: #ffffff;
+  color: #382627;
+  padding: 16px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li {
+  margin-bottom: 16px;
+}
+
+.menu a {
+  color: #080808;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.menu a:hover {
+  color: #1565c0;
+  text-decoration: underline;
+}
