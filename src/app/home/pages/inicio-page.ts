@@ -12,15 +12,6 @@ import { AuthService } from '../../auth/services/auth.service';
 })
 
 export class InicioPage {
-  usuario: any;
-  rol: string = '';
-
-  constructor(private authService: AuthService) { }
-
-  ngOnInit() {
-
-    this.usuario = this.authService.getUser();
-    this.rol = this.usuario?.rol || '';
-  }
+  
 
 }

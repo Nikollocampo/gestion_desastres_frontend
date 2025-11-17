@@ -1,7 +1,33 @@
-.midiv_2 {
-  border: 2px solid #4CAF50;
-  padding: 15px;
-  margin: 10px;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+
+.modal-backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0,0,0,0.4);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+}
+
+.modal-content {
+	background: #fff;
+	padding: 2rem;
+	border-radius: 8px;
+	min-width: 320px;
+	max-width: 90vw;
+	box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+	position: relative;
+}
+
+.close-btn {
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	background: transparent;
+	border: none;
+	font-size: 2rem;
+	cursor: pointer;
 }

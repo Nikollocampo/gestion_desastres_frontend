@@ -1,4 +1,62 @@
-<div class="midiv_2">
-  <p>zonas-afectadas works!</p>
-  <button>Agregar recurso</button>
+<div *ngIf="cargando">Cargando datos...</div>
+<div *ngIf="error">{{ error }}</div>
+<div *ngIf="!cargando && !error">
+	<table border="1" style="width:100%; border-collapse:collapse;">
+		<thead>
+			<tr>
+				<th>D</th>
+				<th>Magnitud</th>
+				<th>Personas Afectadas</th>
+				<th>Fecha</th>
+				<th>Ubicación (Nombre)</th>
+				<th>Show</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let desastre of desastres">
+				<td>{{ desastre.idDesastre }}</td>
+				<td>{{ desastre.magnitud }}</td>
+				<td>{{ desastre.personasAfectadas }}</td>
+				<td>{{ desastre.fecha | fechaFmt }}</td>
+				<td>{{ desastre.ubicacion.nombre }}</td>
+				<td>
+					<button (click)="openModal(desastre)">Show</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<!-- Modal -->
+	<div class="modal-backdrop" *ngIf="modalVisible">
+		<div class="modal-content">
+			<button class="close-btn" (click)="closeModal()">&times;</button>
+			<div *ngIf="selectedDesastre">
+				<h3>{{ selectedDesastre.nombre }} ({{ selectedDesastre.tipoDesastre }})</h3>
+				<p><strong>ID:</strong> {{ selectedDesastre.idDesastre }}</p>
+				<p><strong>Magnitud:</strong> {{ selectedDesastre.magnitud }}</p>
+				<p><strong>Personas Afectadas:</strong> {{ selectedDesastre.personasAfectadas }}</p>
+				<p><strong>Fecha:</strong> {{ selectedDesastre.fecha | fechaFmt }}</p>
+				<div>
+					<strong>Ubicación:</strong>
+					<ul>
+						<li>Nombre: {{ selectedDesastre.ubicacion.nombre }}</li>
+						<li>Calle: {{ selectedDesastre.ubicacion.calle }}</li>
+						<li>Carrera: {{ selectedDesastre.ubicacion.carrera }}</li>
+						<li>Tipo: {{ selectedDesastre.ubicacion.tipoUbicacion }}</li>
+					</ul>
+				</div>
+				<div *ngIf="selectedDesastre.equiposAsignados.length">
+					<strong>Equipos Asignados:</strong>
+					<ul>
+						<li *ngFor="let equipo of selectedDesastre.equiposAsignados">
+							<span>{{ equipo.tipoEquipo }} (ID: {{ equipo.idEquipo }}) - Integrantes: {{ equipo.integrantesDisponibles }}</span>
+							<ul>
+								<li>Ubicación: {{ equipo.ubicacion.nombre }} ({{ equipo.ubicacion.tipoUbicacion }})</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
