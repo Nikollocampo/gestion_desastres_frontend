@@ -1,30 +1,38 @@
-<div *ngIf="cargando">Cargando datos...</div>
-<div *ngIf="error">{{ error }}</div>
-<div *ngIf="!cargando && !error">
-	<table border="1" style="width:100%; border-collapse:collapse;">
+
+<div class="zonas-afectadas">
+	<h2>Desastres</h2>
+	<div *ngIf="cargando">Cargando datos...</div>
+	<div *ngIf="error">{{ error }}</div>
+	<div *ngIf="!cargando && !error">
+	<table border="1" class="tabla-compacta" style="margin: 0 auto; width: 100%; border-collapse:collapse;">
 		<thead>
 			<tr>
 				<th>D</th>
 				<th>Magnitud</th>
 				<th>Personas Afectadas</th>
 				<th>Fecha</th>
-				<th>Ubicación (Nombre)</th>
-				<th>Show</th>
+				<th>Ubicación</th>
+				<th>Detalles</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="let desastre of desastres">
+			<tr *ngFor="let desastre of desastresPaginados">
 				<td>{{ desastre.idDesastre }}</td>
 				<td>{{ desastre.magnitud }}</td>
 				<td>{{ desastre.personasAfectadas }}</td>
 				<td>{{ desastre.fecha | fechaFmt }}</td>
 				<td>{{ desastre.ubicacion.nombre }}</td>
 				<td>
-					<button (click)="openModal(desastre)">Show</button>
+					<button class="ver-mas-btn" (click)="openModal(desastre)">Ver más</button>
 				</td>
 			</tr>
 		</tbody>
 	</table>
+	<div *ngIf="!cargando && !error && desastres.length > pageSize" class="paginacion-recursos" style="justify-content: center;">
+		<button (click)="cambiarPagina(-1)" [disabled]="page === 1">Anterior</button>
+		<span>Página {{ page }} de {{ totalPages }}</span>
+		<button (click)="cambiarPagina(1)" [disabled]="page === totalPages">Siguiente</button>
+	</div>
 
 	<!-- Modal -->
 	<div class="modal-backdrop" *ngIf="modalVisible">
@@ -36,27 +44,30 @@
 				<p><strong>Magnitud:</strong> {{ selectedDesastre.magnitud }}</p>
 				<p><strong>Personas Afectadas:</strong> {{ selectedDesastre.personasAfectadas }}</p>
 				<p><strong>Fecha:</strong> {{ selectedDesastre.fecha | fechaFmt }}</p>
+
 				<div>
-					<strong>Ubicación:</strong>
+					<div class="section-title">Ubicación</div>
 					<ul>
-						<li>Nombre: {{ selectedDesastre.ubicacion.nombre }}</li>
-						<li>Calle: {{ selectedDesastre.ubicacion.calle }}</li>
-						<li>Carrera: {{ selectedDesastre.ubicacion.carrera }}</li>
-						<li>Tipo: {{ selectedDesastre.ubicacion.tipoUbicacion }}</li>
+						<li><strong>Nombre:</strong> {{ selectedDesastre.ubicacion.nombre }}</li>
+						<li><strong>Calle:</strong> {{ selectedDesastre.ubicacion.calle }}</li>
+						<li><strong>Carrera:</strong> {{ selectedDesastre.ubicacion.carrera }}</li>
+						<li><strong>Tipo:</strong> {{ selectedDesastre.ubicacion.tipoUbicacion }}</li>
 					</ul>
 				</div>
 				<div *ngIf="selectedDesastre.equiposAsignados.length">
-					<strong>Equipos Asignados:</strong>
+					<div class="section-title">Equipos Asignados</div>
 					<ul>
 						<li *ngFor="let equipo of selectedDesastre.equiposAsignados">
-							<span>{{ equipo.tipoEquipo }} (ID: {{ equipo.idEquipo }}) - Integrantes: {{ equipo.integrantesDisponibles }}</span>
+							<span><strong>{{ equipo.tipoEquipo }}</strong> (ID: {{ equipo.idEquipo }}) - Integrantes: {{ equipo.integrantesDisponibles }}</span>
 							<ul>
-								<li>Ubicación: {{ equipo.ubicacion.nombre }} ({{ equipo.ubicacion.tipoUbicacion }})</li>
+								<li><strong>Ubicación:</strong> {{ equipo.ubicacion.nombre }} ({{ equipo.ubicacion.tipoUbicacion }})</li>
 							</ul>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</div>
+	</div>
+
 	</div>
 </div>

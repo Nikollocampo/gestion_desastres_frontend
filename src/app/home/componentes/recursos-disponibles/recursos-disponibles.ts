@@ -14,6 +14,17 @@ export class RecursosDisponibles implements OnInit {
   loading = true;
   error = '';
 
+  // Paginación
+  page = 1;
+  pageSize = 5;
+  get totalPages() {
+    return Math.ceil(this.recursos.length / this.pageSize);
+  }
+  get recursosPaginados() {
+    const start = (this.page - 1) * this.pageSize;
+    return this.recursos.slice(start, start + this.pageSize);
+  }
+
   constructor(private recursosService: RecursosService) {}
 
   ngOnInit(): void {
@@ -27,5 +38,12 @@ export class RecursosDisponibles implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  cambiarPagina(delta: number) {
+    const nuevaPagina = this.page + delta;
+    if (nuevaPagina >= 1 && nuevaPagina <= this.totalPages) {
+      this.page = nuevaPagina;
+    }
   }
 }

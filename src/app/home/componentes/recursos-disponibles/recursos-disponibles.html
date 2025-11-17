@@ -17,7 +17,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="let recurso of recursos">
+			<tr *ngFor="let recurso of recursosPaginados">
 				<td>{{ recurso.id }}</td>
 				<td>{{ recurso.nombre }}</td>
 				<td>{{ recurso.tipo }}</td>
@@ -29,6 +29,11 @@
 			</tr>
 		</tbody>
 	</table>
+	<div *ngIf="!loading && !error && recursos.length > pageSize" class="paginacion-recursos">
+		<button (click)="cambiarPagina(-1)" [disabled]="page === 1">Anterior</button>
+		<span>Página {{ page }} de {{ totalPages }}</span>
+		<button (click)="cambiarPagina(1)" [disabled]="page === totalPages">Siguiente</button>
+	</div>
 	<div *ngIf="!loading && !error && recursos.length === 0">
 		No hay recursos disponibles.
 	</div>

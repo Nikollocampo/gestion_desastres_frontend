@@ -50,6 +50,17 @@ export class ZonasAfectadas implements OnInit {
   modalVisible = false;
   selectedDesastre: Desastre | null = null;
 
+  // Paginación
+  page = 1;
+  pageSize = 5;
+  get totalPages() {
+    return Math.ceil(this.desastres.length / this.pageSize);
+  }
+  get desastresPaginados() {
+    const start = (this.page - 1) * this.pageSize;
+    return this.desastres.slice(start, start + this.pageSize);
+  }
+
   constructor(private desastreService: DesastreService) {}
 
   ngOnInit() {
@@ -75,5 +86,11 @@ export class ZonasAfectadas implements OnInit {
     this.selectedDesastre = null;
   }
 
+  cambiarPagina(delta: number) {
+    const nuevaPagina = this.page + delta;
+    if (nuevaPagina >= 1 && nuevaPagina <= this.totalPages) {
+      this.page = nuevaPagina;
+    }
+  }
   // Se usa el pipe fechaFmt para formatear fechas de distintas representaciones.
 }
