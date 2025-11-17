@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
+import { FormsModule, NgForm } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
@@ -10,7 +9,7 @@ import { Router } from '@angular/router';
   standalone: true,
   templateUrl: './login.html',
   styleUrls: ['./login.css'],
-  imports: [FormsModule, NgIf, RouterLink]
+  imports: [FormsModule, RouterLink]
 })
 export class LoginComponent {
   email: string = '';
@@ -19,8 +18,12 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  login() {
+  login(loginForm?: NgForm) {
     this.error = '';
+    if (loginForm && loginForm.invalid) {
+      Object.values(loginForm.controls).forEach(control => control.markAsTouched());
+      return;
+    }
     this.authService.login({ email: this.email, contrasena: this.contrasena }).subscribe({
       next: (user) => {
         this.authService.setUser(user);

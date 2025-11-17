@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
+import { FormsModule, NgForm } from '@angular/forms';
 import { AuthService } from '../../auth.service';
 import { Router, RouterLink } from '@angular/router';
 
@@ -20,8 +19,12 @@ export class RegisterComponent {
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  register() {
+  register(registerForm?: NgForm) {
     this.error = '';
+    if (registerForm && registerForm.invalid) {
+      Object.values(registerForm.controls).forEach(control => control.markAsTouched());
+      return;
+    }
     this.authService
       .register({ nombre: this.nombre, email: this.email, contrasena: this.password, rol: this.rol })
       .subscribe({
@@ -29,8 +32,8 @@ export class RegisterComponent {
           this.authService.setUser(user);
           this.router.navigate(['/navigation']);
         },
-        error: () => {
-          this.error = 'No se pudo registrar. Verifica los datos.';
+        error: (err) => {
+          this.error = err?.error?.error || err?.error?.message || 'No se pudo registrar. Verifica los datos.';
         }
       });
   }

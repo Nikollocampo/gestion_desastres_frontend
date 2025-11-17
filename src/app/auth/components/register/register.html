@@ -1,19 +1,33 @@
 <div class="register-container">
   <h2>Registro</h2>
-  <form #registerForm="ngForm" (ngSubmit)="register()">
+  <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
     <label>Nombre:</label>
-    <input type="text" [(ngModel)]="nombre" name="name" required />
+    <input type="text" [(ngModel)]="nombre" name="name" required #nameRef="ngModel" />
+    @if (nameRef.invalid && nameRef.touched) {
+    <div class="error">El nombre es obligatorio.</div>
+    }
     <label>Email:</label>
-    <input type="email" [(ngModel)]="email" name="email" required />
+    <input type="email" [(ngModel)]="email" name="email" required #emailRef="ngModel" />
+    @if (emailRef.invalid && emailRef.touched) {
+    <div class="error">El email es obligatorio y debe ser válido.</div>
+    }
     <label>Contraseña:</label>
-    <input type="password" [(ngModel)]="password" name="password" required />
+    <input type="password" [(ngModel)]="password" name="password" required #passRef="ngModel" />
+    @if (passRef.invalid && passRef.touched) {
+    <div class="error">La contraseña es obligatoria.</div>
+    }
     <label>Rol:</label>
-    <select [(ngModel)]="rol" name="rol">
+    <select [(ngModel)]="rol" name="rol" required #rolRef="ngModel">
       <option value="ADMINISTRADOR">Administrador</option>
       <option value="OPERADOR_EMERGENCIA">Operador de Emergencia</option>
     </select>
+    @if (rolRef.invalid && rolRef.touched) {
+    <div class="error">El rol es obligatorio.</div>
+    }
     <button type="submit">Registrarse</button>
-    <div *ngIf="error" class="error">{{ error }}</div>
+    @if (error) {
+    <div class="error">{{ error }}</div>
+    }
   </form>
   <div class="login-link">
     ¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión aquí</a>

@@ -1,10 +1,16 @@
 <div class="login-container">
   <h2>Iniciar Sesión</h2>
-  <form #loginForm="ngForm" (ngSubmit)="login()">
+  <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
     <label>Email:</label>
-    <input type="email" [(ngModel)]="email" name="email" required />
+    <input type="email" [(ngModel)]="email" name="email" required #emailRef="ngModel" />
+    @if (emailRef.invalid && emailRef.touched) {
+    <div class="error">El email es obligatorio y debe ser válido.</div>
+    }
     <label>Contraseña:</label>
-    <input type="password" [(ngModel)]="contrasena" name="password" required />
+    <input type="password" [(ngModel)]="contrasena" name="password" required #passRef="ngModel" />
+    @if (passRef.invalid && passRef.touched) {
+    <div class="error">La contraseña es obligatoria.</div>
+    }
     <button type="submit">Entrar</button>
     @if (error) {
     <div class="error">{{ error }}</div>
