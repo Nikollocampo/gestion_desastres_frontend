@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RecursosDisponibles } from '../componentes/recursos-disponibles/recursos-disponibles';
 import { ZonasAfectadas } from '../componentes/zonas-afectadas/zonas-afectadas';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-inicio-page',
@@ -9,6 +10,17 @@ import { ZonasAfectadas } from '../componentes/zonas-afectadas/zonas-afectadas';
   templateUrl: './inicio-page.html',
   styleUrl: './inicio-page.css',
 })
+
 export class InicioPage {
+  usuario: any;
+  rol: string = '';
+
+  constructor(private authService: AuthService) { }
+
+  ngOnInit() {
+
+    this.usuario = this.authService.getUser();
+    this.rol = this.usuario?.rol || '';
+  }
 
 }

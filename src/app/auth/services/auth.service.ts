@@ -46,7 +46,6 @@ export class AuthService {
 
   getUser(): UsuarioResponse | null {
     const user = localStorage.getItem('user');
-    console.log('AuthService.getUser:', user);
     return user ? JSON.parse(user) : null;
   }
 
