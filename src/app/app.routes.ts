@@ -1,4 +1,3 @@
-
 import { Routes, Router } from '@angular/router';
 import { LoginComponent } from './auth/components/login/login';
 import { RegisterComponent } from './auth/components/register/register';
@@ -20,7 +19,11 @@ export const routes: Routes = [
     path: 'navigation',
     loadComponent: () => import('./navigation/pages/navigation-page').then(m => m.NavigationPage),
     canActivate: [AuthGuard],
-    data: { roles: ['ADMINISTRADOR', 'OPERADOR_EMERGENCIA'] }
+    data: { roles: ['ADMINISTRADOR', 'OPERADOR_EMERGENCIA'] },
+    children: [
+      { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+      { path: 'inicio', loadComponent: () => import('./home/pages/inicio-page').then(m => m.InicioPage) }
+    ]
   },
 
   // Wildcard al final
