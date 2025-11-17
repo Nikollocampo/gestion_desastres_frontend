@@ -1,0 +1,35 @@
+
+<div class="recursos-disponibles">
+	<h2>Recursos Disponibles</h2>
+	<div *ngIf="loading">Cargando recursos...</div>
+	<div *ngIf="error">{{ error }}</div>
+	<table *ngIf="!loading && !error && recursos.length > 0">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nombre</th>
+				<th>Tipo</th>
+				<th>Cantidad</th>
+				<th>Ubicación</th>
+				<th>Calle</th>
+				<th>Carrera</th>
+				<th>Tipo Ubicación</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let recurso of recursos">
+				<td>{{ recurso.id }}</td>
+				<td>{{ recurso.nombre }}</td>
+				<td>{{ recurso.tipo }}</td>
+				<td>{{ recurso.cantidad }}</td>
+				<td>{{ recurso.ubicacion?.nombre }}</td>
+				<td>{{ recurso.ubicacion?.calle }}</td>
+				<td>{{ recurso.ubicacion?.carrera }}</td>
+				<td>{{ recurso.ubicacion?.tipoUbicacion }}</td>
+			</tr>
+		</tbody>
+	</table>
+	<div *ngIf="!loading && !error && recursos.length === 0">
+		No hay recursos disponibles.
+	</div>
+</div>
