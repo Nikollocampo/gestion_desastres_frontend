@@ -2,6 +2,10 @@
   background: #1976d2;
   color: #fff;
   padding: 16px;
+  font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
 }
 
 .header-content {

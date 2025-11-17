@@ -1,5 +1,15 @@
 <div class="login-container">
-  <h2>Iniciar Sesión</h2>
+  <h2 class="login-title">
+    <span class="login-icon" aria-hidden="true">
+      <!-- Icono de acceso/login moderno -->
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15 3H21V21H15" stroke="#1976d2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M10 17L15 12L10 7" stroke="#1976d2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M3 12H15" stroke="#1976d2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+    Iniciar Sesión
+  </h2>
   <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
     <label>Email:</label>
     <input type="email" [(ngModel)]="email" name="email" required #emailRef="ngModel" />

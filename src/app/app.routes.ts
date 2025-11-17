@@ -22,7 +22,10 @@ export const routes: Routes = [
     data: { roles: ['ADMINISTRADOR', 'OPERADOR_EMERGENCIA'] },
     children: [
       { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-      { path: 'inicio', loadComponent: () => import('./home/pages/inicio-page').then(m => m.InicioPage) }
+      { path: 'inicio', loadComponent: () => import('./home/pages/inicio-page').then(m => m.InicioPage) },
+      { path: 'administracion', loadComponent: () => import('./home/pages/administracion-page').then(m => m.AdministracionPage) },
+      { path: 'rutas-estadisticas', loadComponent: () => import('./home/pages/rutas-estadisticas-page').then(m => m.RutasEstadisticasPage) },
+      { path: 'mapa-interactivo', loadComponent: () => import('./home/pages/mapa-interactivo-page').then(m => m.MapaInteractivoPage) }
     ]
   },
 

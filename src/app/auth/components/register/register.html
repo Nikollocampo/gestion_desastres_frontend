@@ -1,5 +1,16 @@
 <div class="register-container">
-  <h2>Registro</h2>
+  <h2 class="register-title">
+    <span class="register-icon" aria-hidden="true">
+      <!-- Icono de registro/usuario -->
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="8" r="4" stroke="#1976d2" stroke-width="2" fill="#2196f3"/>
+        <path d="M4 20v-1a7 7 0 0114 0v1" stroke="#1976d2" stroke-width="2" fill="none"/>
+        <path d="M16 12l4 4" stroke="#1976d2" stroke-width="2" stroke-linecap="round"/>
+        <path d="M20 16l-4-4" stroke="#1976d2" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </span>
+    <span style="color:#111">Registro</span>
+  </h2>
   <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
     <label>Nombre:</label>
     <input type="text" [(ngModel)]="nombre" name="name" required #nameRef="ngModel" />

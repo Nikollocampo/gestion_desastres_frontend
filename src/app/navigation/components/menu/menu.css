@@ -1,3 +1,9 @@
+.menu-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+  color: #1976d2;
+}
 /* Mejor organización y visualización del menú lateral */
 .menu {
   background: #ffffff;
@@ -22,6 +28,9 @@
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s;
+  font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+  font-size: 1.15rem;
+  letter-spacing: 0.5px;
 }
 
 .menu a:hover {
