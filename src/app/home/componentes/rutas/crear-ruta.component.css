@@ -1,0 +1,35 @@
+.crear-ruta-container {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  max-width: 400px;
+  margin: 1rem auto;
+  background: #fafafa;
+}
+.crear-ruta-container h2 {
+  margin-top: 0;
+}
+.crear-ruta-container form > div {
+  margin-bottom: 1rem;
+}
+.crear-ruta-container label {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.crear-ruta-container input {
+  width: 100%;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+button {
+  padding: 0.5rem 1rem;
+}
+.mensaje {
+  color: green;
+  margin-top: 1rem;
+}
+.error {
+  color: red;
+  margin-top: 1rem;
+}
+

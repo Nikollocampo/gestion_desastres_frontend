@@ -1,0 +1,20 @@
+<div class="crear-ruta-container">
+  <h2>Crear Ruta</h2>
+  <form (ngSubmit)="crearRuta()" #rutaForm="ngForm">
+    <div>
+      <label for="origenId">ID Origen:</label>
+      <input id="origenId" name="origenId" [(ngModel)]="origenId" required />
+    </div>
+    <div>
+      <label for="destinoId">ID Destino:</label>
+      <input id="destinoId" name="destinoId" [(ngModel)]="destinoId" required />
+    </div>
+    <div>
+      <label for="distancia">Distancia (km):</label>
+      <input id="distancia" name="distancia" type="number" [(ngModel)]="distancia" required min="0" step="0.01" />
+    </div>
+    <button type="submit" [disabled]="cargando || !rutaForm.form.valid">Crear Ruta</button>
+  </form>
+  <div *ngIf="mensaje" class="mensaje">{{ mensaje }}</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+</div>
