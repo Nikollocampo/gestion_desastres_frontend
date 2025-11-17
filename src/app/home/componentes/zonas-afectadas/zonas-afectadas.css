@@ -90,30 +90,30 @@ tr:nth-child(even) {
 
 .modal-content {
 	background: #fff;
-	padding: 2.2rem 2.5rem 2.2rem 2.5rem;
-	border-radius: 16px;
-	min-width: 340px;
-	max-width: 480px;
-	box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+	padding: 1.1rem 1.2rem 1.1rem 1.2rem;
+	border-radius: 12px;
+	min-width: 260px;
+	max-width: 340px;
+	box-shadow: 0 2px 16px rgba(0,0,0,0.13);
 	position: relative;
 	font-family: 'Montserrat', 'Segoe UI', 'Arial', sans-serif;
-	font-size: 1.13rem;
+	font-size: 0.98rem;
 	color: #181818;
-	line-height: 1.7;
+	line-height: 1.45;
 	letter-spacing: 0.01em;
 }
 
 .modal-content h3 {
-	font-size: 1.45rem;
-	font-weight: 800;
-	margin-bottom: 1.2rem;
+	font-size: 1.08rem;
+	font-weight: 700;
+	margin-bottom: 0.7rem;
 	color: #181818;
 	font-family: 'Montserrat', 'Segoe UI', 'Arial', sans-serif;
 	letter-spacing: 0.01em;
 }
 .modal-content p {
-	margin: 0.5rem 0 0.5rem 0;
-	font-size: 1.09rem;
+	margin: 0.25rem 0 0.25rem 0;
+	font-size: 0.97rem;
 	font-family: 'Montserrat', 'Segoe UI', 'Arial', sans-serif;
 	color: #222;
 }
@@ -123,35 +123,35 @@ tr:nth-child(even) {
 	font-family: 'Montserrat', 'Segoe UI', 'Arial', sans-serif;
 }
 .modal-content ul {
-	margin: 0.3rem 0 0.7rem 1.2rem;
-	padding-left: 1.2rem;
+	margin: 0.15rem 0 0.3rem 1.0rem;
+	padding-left: 1.0rem;
 	font-family: 'Montserrat', 'Segoe UI', 'Arial', sans-serif;
-	font-size: 1.01rem;
+	font-size: 0.93rem;
 	color: #222;
 }
 .modal-content li {
-	margin-bottom: 0.2rem;
-	font-size: 1rem;
+	margin-bottom: 0.12rem;
+	font-size: 0.93rem;
 	font-family: 'Montserrat', 'Segoe UI', 'Arial', sans-serif;
 	color: #222;
 }
 .modal-content .section-title {
-	margin-top: 1.1rem;
-	margin-bottom: 0.3rem;
+	margin-top: 0.6rem;
+	margin-bottom: 0.18rem;
 	font-weight: 700;
 	color: #1976d2;
-	font-size: 1.13rem;
+	font-size: 1.01rem;
 	letter-spacing: 0.01em;
 	font-family: 'Montserrat', 'Segoe UI', 'Arial', sans-serif;
 }
 
 .close-btn {
 	position: absolute;
-	top: 0.5rem;
-	right: 0.5rem;
+	top: 0.2rem;
+	right: 0.2rem;
 	background: transparent;
 	border: none;
-	font-size: 2rem;
+	font-size: 1.3rem;
 	cursor: pointer;
 }
 
