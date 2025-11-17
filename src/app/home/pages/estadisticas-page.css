@@ -1,0 +1,14 @@
+.estadisticas-page {
+  padding: 24px;
+}
+
+.estadisticas-page h1 {
+  color: #1976d2;
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
+
+.estadisticas-page p {
+  font-size: 1.1rem;
+  color: #333;
+}
