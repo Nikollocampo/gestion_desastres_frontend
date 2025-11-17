@@ -2,28 +2,28 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { AuthService } from '../../auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, NgIf],
+  imports: [FormsModule, RouterLink],
   templateUrl: './register.html',
   styleUrls: ['./register.css']
 })
 export class RegisterComponent {
-  name: string = '';
+  nombre: string = '';
   email: string = '';
   password: string = '';
-  role: string = 'ADMINISTRATOR';
+  rol: string = 'ADMINISTRADOR';
   error: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   register() {
     this.error = '';
     this.authService
-      .register({ name: this.name, email: this.email, contrasena: this.password, role: this.role })
+      .register({ nombre: this.nombre, email: this.email, contrasena: this.password, rol: this.rol })
       .subscribe({
         next: (user) => {
           this.authService.setUser(user);

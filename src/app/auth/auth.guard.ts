@@ -4,16 +4,18 @@ import { AuthService } from './auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    const expectedRoles = route.data['roles'] as string[];
+    const userRol = this.authService.getRol();
     if (!this.authService.isLoggedIn()) {
+      console.log('AuthGuard: usuario no logueado, redirigiendo a /login');
       this.router.navigate(['/login']);
       return false;
     }
-    const expectedRoles = route.data['roles'] as string[];
-    const userRole = this.authService.getRole();
-    if (expectedRoles && (!userRole || !expectedRoles.includes(userRole))) {
+    if (expectedRoles && (!userRol || !expectedRoles.includes(userRol))) {
+      console.log('AuthGuard: rol no permitido, redirigiendo a /login');
       this.router.navigate(['/login']);
       return false;
     }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
 
@@ -9,18 +10,18 @@ import { Router } from '@angular/router';
   standalone: true,
   templateUrl: './login.html',
   styleUrls: ['./login.css'],
-  imports: [FormsModule, NgIf]
+  imports: [FormsModule, NgIf, RouterLink]
 })
 export class LoginComponent {
   email: string = '';
-  password: string = '';
+  contrasena: string = '';
   error: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   login() {
     this.error = '';
-    this.authService.login({ email: this.email, contrasena: this.password }).subscribe({
+    this.authService.login({ email: this.email, contrasena: this.contrasena }).subscribe({
       next: (user) => {
         this.authService.setUser(user);
         this.router.navigate(['/navigation']);

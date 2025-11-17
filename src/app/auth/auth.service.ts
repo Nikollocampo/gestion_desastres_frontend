@@ -8,17 +8,17 @@ export interface LoginRequest {
 }
 
 export interface RegisterRequest {
-  name: string;
+  nombre: string;
   email: string;
   contrasena: string;
-  role: string;
+  rol: string;
 }
 
 export interface UsuarioResponse {
   id: number;
-  name: string;
+  nombre: string;
   email: string;
-  role: string;
+  rol: string;
   token: string;
 }
 
@@ -26,8 +26,9 @@ export interface UsuarioResponse {
 export class AuthService {
   private apiUrl = 'http://localhost:8080/api/auth';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
+  //ok
   login(data: LoginRequest): Observable<UsuarioResponse> {
     return this.http.post<UsuarioResponse>(`${this.apiUrl}/login`, data);
   }
@@ -36,13 +37,16 @@ export class AuthService {
     return this.http.post<UsuarioResponse>(`${this.apiUrl}/register`, data);
   }
 
+  //ok
   // Métodos para guardar y obtener el usuario logueado
   setUser(user: UsuarioResponse) {
+    console.log('AuthService.setUser:', user);
     localStorage.setItem('user', JSON.stringify(user));
   }
 
   getUser(): UsuarioResponse | null {
     const user = localStorage.getItem('user');
+    console.log('AuthService.getUser:', user);
     return user ? JSON.parse(user) : null;
   }
 
@@ -50,12 +54,14 @@ export class AuthService {
     localStorage.removeItem('user');
   }
 
+  //
   isLoggedIn(): boolean {
     return !!this.getUser();
   }
 
-  getRole(): string | null {
+  getRol(): string | null {
     const user = this.getUser();
-    return user ? user.role : null;
+    console.log('AuthService.getRol: user =', user);
+    return user ? user.rol : null;
   }
 }
