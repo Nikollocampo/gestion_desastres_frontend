@@ -1,26 +1,7 @@
 <div class="ubicaciones-container">
-  <h2>Lista de Ubicaciones</h2>
+  <!-- Título eliminado -->
   <div *ngIf="cargando">Cargando ubicaciones...</div>
   <div *ngIf="error" class="error">{{ error }}</div>
-  <table *ngIf="!cargando && ubicaciones.length > 0">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Calle</th>
-        <th>Carrera</th>
-        <th>Tipo Ubicación</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let ubicacion of ubicaciones">
-        <td>{{ ubicacion.id }}</td>
-        <td>{{ ubicacion.nombre }}</td>
-        <td>{{ ubicacion.calle }}</td>
-        <td>{{ ubicacion.carrera }}</td>
-        <td>{{ ubicacion.tipoUbicacion }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <!-- Tabla eliminada, solo mensajes de carga, error y vacío -->
   <div *ngIf="!cargando && ubicaciones.length === 0">No hay ubicaciones registradas.</div>
 </div>

@@ -2,12 +2,22 @@
   <h2>Crear Ruta</h2>
   <form (ngSubmit)="crearRuta()" #rutaForm="ngForm">
     <div>
-      <label for="origenId">ID Origen:</label>
-      <input id="origenId" name="origenId" [(ngModel)]="origenId" required />
+      <label for="origenId">Origen:</label>
+      <select id="origenId" name="origenId" [(ngModel)]="origenId" required>
+        <option value="" disabled selected>Selecciona una ubicación</option>
+        <option *ngFor="let ubicacion of ubicaciones" [value]="ubicacion.id">
+          {{ ubicacion.nombre }}
+        </option>
+      </select>
     </div>
     <div>
-      <label for="destinoId">ID Destino:</label>
-      <input id="destinoId" name="destinoId" [(ngModel)]="destinoId" required />
+      <label for="destinoId">Destino:</label>
+      <select id="destinoId" name="destinoId" [(ngModel)]="destinoId" required>
+        <option value="" disabled selected>Selecciona una ubicación</option>
+        <option *ngFor="let ubicacion of ubicaciones" [value]="ubicacion.id">
+          {{ ubicacion.nombre }}
+        </option>
+      </select>
     </div>
     <div>
       <label for="distancia">Distancia (km):</label>

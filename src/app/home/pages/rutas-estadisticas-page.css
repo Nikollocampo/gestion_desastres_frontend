@@ -1,8 +1,15 @@
 .rutas-estadisticas-page {
-  padding: 32px;
+  padding: 16px 24px;
 }
-.rutas-estadisticas-page h1 {
-  color: #1976d2;
-  font-size: 2rem;
+.rutas-grid {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
   margin-bottom: 16px;
+}
+.rutas-grid > * {
+  flex: 1 1 340px;
+  max-width: 440px;
 }
