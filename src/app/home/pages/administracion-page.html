@@ -1,9 +1,8 @@
 <div class="administracion-page">
-  <h1>Administración</h1>
+  
 
   <ng-container *ngIf="rol === 'ADMINISTRADOR'; else noAdmin">
     <section>
-      <h2>Panel de Administrador</h2>
       <app-boton-generar-reporte></app-boton-generar-reporte>
       <h3>Añadir equipo</h3>
       <app-crear-equipo></app-crear-equipo>
@@ -45,8 +44,7 @@
   <ng-template #noAdmin>
     <ng-container *ngIf="rol === 'OPERADOR_EMERGENCIA'; else noRol">
       <section>
-        <h2>Panel de Operador de Emergencia</h2>
-        <h3>Monitorear ubicaciones</h3>
+        
         <app-monitorear-ubicaciones [ubicaciones]="ubicacionesMonitoreo"></app-monitorear-ubicaciones>
         <h3>Actualizar situación de un desastre</h3>
         <app-actualizar-situacion-desastre [desastres]="desastresActualizar" (actualizar)="onActualizarSituacion($event)"></app-actualizar-situacion-desastre>

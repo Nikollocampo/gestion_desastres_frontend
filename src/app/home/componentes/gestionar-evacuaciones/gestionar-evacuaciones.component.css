@@ -1,12 +1,110 @@
-.evacuaciones-lista {
-  margin-top: 1em;
-  padding-left: 1.5em;
+/* Tarjeta contenedora */
+.evacuaciones-card {
+  padding: 0.9rem;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(66,165,245,0.08);
+  border: 1px solid #d6e1eb;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  margin: 10px 0;
 }
-.evacuacion-item {
-  margin-bottom: 0.5em;
+
+/* Título pequeño dentro de la tarjeta */
+.titulo-gestion {
+  margin-top: 0;
+  color: #111;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.01em;
 }
-.titulo-evacuacion {
-  font-weight: bold;
-  margin-bottom: 0.7em;
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.tabla-evacuaciones {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.tabla-evacuaciones thead th {
+  text-align: left;
+  background: #f3f7fb;
+  color: #1a2b3c;
+  border-bottom: 1px solid #d6e1eb;
+  padding: 0.5rem 0.6rem;
+  white-space: nowrap;
+}
+
+.tabla-evacuaciones td {
+  padding: 0.5rem 0.6rem;
+  border-bottom: 1px solid #eef2f6;
+}
+
+.tabla-evacuaciones tr:hover {
+  background: #fafcff;
+}
+
+.tabla-evacuaciones .num {
+  text-align: right;
+}
+
+.chip {
+  display: inline-block;
+  padding: 0.12rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+.chip.alta { background: #fdecea; color: #b3261e; }
+.chip.media { background: #fff4e5; color: #8a4b00; }
+.chip.baja { background: #e9f7ef; color: #1b5e20; }
+
+.sin-evacuaciones {
+  color: #c00;
+  font-size: 0.9rem;
+}
+
+/* Controles de paginación */
+.paginacion {
+  margin-top: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+.pagination-info {
+  color: #3a4a5b;
+  font-size: 0.78rem;
+}
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.pagination-controls button {
+  padding: 0.28rem 0.65rem;
+  background: #42a5f5;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.pagination-controls button[disabled] {
+  background: #e0e0e0;
+  color: #aaa;
+  cursor: not-allowed;
+}
+.pagination-controls button:not([disabled]):hover {
+  background: #2366b8;
+}
+.page-indicator {
+  font-size: 0.78rem;
+  color: #223344;
 }
 

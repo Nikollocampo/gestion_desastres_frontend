@@ -1,15 +1,23 @@
 <form class="actualizar-form" (ngSubmit)="enviarActualizacion()" autocomplete="off">
-  <label for="desastre">Selecciona un desastre:</label>
-  <select id="desastre" [(ngModel)]="selectedId" name="desastre" (change)="seleccionarDesastre(selectedId)" required>
-    <option value="" disabled>-- Selecciona --</option>
-    <option *ngFor="let d of desastres" [ngValue]="d.idDesastre">{{ d.nombre }}</option>
-  </select>
+  <div class="form-row">
+    <label for="desastre">Selecciona un desastre:</label>
+    <select id="desastre" [(ngModel)]="selectedId" name="desastre" (change)="seleccionarDesastre(selectedId)" required>
+      <option value="" disabled selected>-- Selecciona --</option>
+      <option *ngFor="let d of desastres" [ngValue]="d.idDesastre">{{ d.nombre }}</option>
+    </select>
+  </div>
 
-  <label for="personas">Personas afectadas:</label>
-  <input id="personas" type="number" [(ngModel)]="personasAfectadas" name="personasAfectadas" min="0" required>
+  <div class="form-row">
+    <label for="personas">Personas afectadas:</label>
+    <input id="personas" type="number" inputmode="numeric" [(ngModel)]="personasAfectadas" name="personasAfectadas" min="0" placeholder="Ej: 120" required>
+  </div>
 
-  <label for="magnitud">Magnitud:</label>
-  <input id="magnitud" type="number" [(ngModel)]="magnitud" name="magnitud" min="0" required>
+  <div class="form-row">
+    <label for="magnitud">Magnitud:</label>
+    <input id="magnitud" type="number" inputmode="numeric" [(ngModel)]="magnitud" name="magnitud" min="0" placeholder="Ej: 3" required>
+  </div>
 
-  <button type="submit" [disabled]="!selectedId || personasAfectadas == null || magnitud == null">Actualizar situación</button>
+  <div class="actions">
+    <button class="primary" type="submit" [disabled]="!selectedId || personasAfectadas == null || magnitud == null">Actualizar situación</button>
+  </div>
 </form>

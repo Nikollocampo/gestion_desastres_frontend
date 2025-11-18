@@ -1,14 +1,43 @@
-<div class="evacuaciones-lista">
-  <div *ngIf="evacuaciones.length > 0; else sinEvacuaciones">
-    <div class="titulo-evacuacion">{{ evacuaciones[0] }}</div>
-    <ul>
-      <li *ngFor="let ev of evacuaciones.slice(1)" class="evacuacion-item">
-        {{ ev }}
-      </li>
-    </ul>
-  </div>
+<div class="evacuaciones-card">
+  <ng-container *ngIf="items.length > 0; else sinEvacuaciones">
+    <div class="titulo-gestion">{{ tituloLimpio }}</div>
+    <div class="table-wrapper">
+      <table class="tabla-evacuaciones">
+        <thead>
+          <tr>
+            <th>Desastre</th>
+            <th>Zona</th>
+            <th>Riesgo zona</th>
+            <th>Prioridad</th>
+            <th class="num">Personas</th>
+            <th class="num">Magnitud</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let it of paginados">
+            <td>{{ it.desastre }}</td>
+            <td>{{ it.zona }}</td>
+            <td><span class="chip" [ngClass]="it.riesgoZona | lowercase">{{ it.riesgoZona }}</span></td>
+            <td><span class="chip" [ngClass]="it.prioridad | lowercase">{{ it.prioridad }}</span></td>
+            <td class="num">{{ it.personas ?? '-' }}</td>
+            <td class="num">{{ it.magnitud ?? '-' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="paginacion" *ngIf="total > pageSize">
+      <div class="pagination-info">
+        Mostrando {{ startIndex }}–{{ endIndex }} de {{ total }}
+      </div>
+      <div class="pagination-controls">
+        <button type="button" (click)="prevPage()" [disabled]="page === 1">Anterior</button>
+        <span class="page-indicator">Página {{ page }} / {{ totalPages }}</span>
+        <button type="button" (click)="nextPage()" [disabled]="page === totalPages">Siguiente</button>
+      </div>
+    </div>
+  </ng-container>
   <ng-template #sinEvacuaciones>
-    <span style="color: #c00;">No hay evacuaciones para mostrar.</span>
+    <div class="sin-evacuaciones">No hay evacuaciones para mostrar.</div>
   </ng-template>
 </div>
 

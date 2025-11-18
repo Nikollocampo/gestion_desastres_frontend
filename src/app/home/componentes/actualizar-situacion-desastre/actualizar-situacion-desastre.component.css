@@ -1,22 +1,74 @@
+/* Contenedor con estilo de tarjeta, consistente con formularios existentes */
 .actualizar-form {
-  margin: 1em 0;
-  padding: 1em;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background: #f9f9f9;
-  max-width: 400px;
+  padding: 0.9rem;
+  border-radius: 10px;
+  max-width: 360px;
+  margin: 10px 0;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(66,165,245,0.08);
+  border: 1px solid #d6e1eb;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
 }
+
+.actualizar-form .form-row { 
+  margin-bottom: 0.55rem;
+}
+
 .actualizar-form label {
   display: block;
-  margin-top: 0.5em;
+  margin-bottom: 0.2rem;
+  color: #222;
+  font-weight: 500;
+  font-size: 0.72rem;
 }
-.actualizar-form select, .actualizar-form input {
+
+.actualizar-form select,
+.actualizar-form input {
   width: 100%;
-  margin-top: 0.2em;
-  margin-bottom: 0.7em;
-  padding: 0.3em;
+  padding: 0.35rem 0.5rem;
+  box-sizing: border-box;
+  border: 1px solid #b6c6e3;
+  border-radius: 4px;
+  font-size: 0.74rem;
+  background: #f7fafd;
+  transition: border 0.2s, box-shadow 0.2s, background 0.2s;
 }
-button {
-  margin-top: 0.5em;
+
+.actualizar-form select:focus,
+.actualizar-form input:focus {
+  border: 1px solid #42a5f5;
+  outline: none;
+  background: #eaf4ff;
+  box-shadow: 0 0 0 3px rgba(66, 165, 245, 0.15);
+}
+
+.actualizar-form .actions { 
+  margin-top: 0.35rem;
+}
+
+.actualizar-form button.primary {
+  padding: 0.35rem 0.8rem;
+  background: #42a5f5;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.02s;
+}
+
+.actualizar-form button.primary:disabled {
+  background: #e0e0e0;
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+.actualizar-form button.primary:hover:not(:disabled) {
+  background: #2366b8;
+}
+
+.actualizar-form button.primary:active:not(:disabled) {
+  transform: translateY(1px);
 }
 

@@ -1,14 +1,49 @@
-<div class="ubicaciones-lista">
+<div class="ubicaciones-card">
   <div *ngIf="ubicaciones.length > 0; else sinUbicaciones">
-    <div class="titulo-monitoreo">{{ ubicaciones[0] }}</div>
-    <ul>
-      <li *ngFor="let ubicacion of ubicaciones.slice(1)" class="ubicacion-item">
-        {{ ubicacion }}
-      </li>
-    </ul>
+    <h2 class="titulo-monitoreo">Ubicaciones monitoreadas</h2>
+    <div class="table-wrapper" *ngIf="allParsed.length > 0; else vacio">
+      <table>
+        <thead>
+          <tr>
+            <th>Ubicación</th>
+            <th style="width: 30%">Calle</th>
+            <th style="width: 30%">Carrera</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let u of paginadas">
+            <td>{{ u.nombre }}</td>
+            <td>
+              <ng-container [ngSwitch]="u.type">
+                <span *ngSwitchCase="'numeric'" class="chip">{{ u.x }}</span>
+                <span *ngSwitchCase="'text'" class="coords-alt">{{ u.raw }}</span>
+                <span *ngSwitchDefault>—</span>
+              </ng-container>
+            </td>
+            <td>
+              <ng-container [ngSwitch]="u.type">
+                <span *ngSwitchCase="'numeric'" class="chip">{{ u.y }}</span>
+                <span *ngSwitchCase="'text'" class="coords-alt"></span>
+                <span *ngSwitchDefault>—</span>
+              </ng-container>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ng-template #vacio>
+      <div class="estado-vacio">No hay ubicaciones para mostrar.</div>
+    </ng-template>
+
+    <div class="paginacion" *ngIf="allParsed.length > pageSize">
+      <button (click)="prevPage()" [disabled]="page === 1">Anterior</button>
+      <span>Página {{ page }} de {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="page === totalPages">Siguiente</button>
+    </div>
   </div>
   <ng-template #sinUbicaciones>
-    <span style="color: #c00;">No hay ubicaciones para monitorear.</span>
+    <div class="estado-vacio">No hay ubicaciones para monitorear.</div>
   </ng-template>
 </div>
 
