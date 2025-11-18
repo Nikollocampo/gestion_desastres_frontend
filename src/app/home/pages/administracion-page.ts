@@ -4,11 +4,12 @@ import { BotonGenerarReporteComponent } from '../componentes/boton-generar-repor
 import { Desastre, DesastreService } from '../services/desastre.service';
 import { AsignarEquipoComponent } from '../componentes/asignar-equipo/asignar-equipo.component';
 import { CrearEquipoComponent } from '../componentes/crear-equipo/crear-equipo.component';
+import { DefinirRutaComponent } from '../componentes/definir-ruta/definir-ruta.component';
 
 @Component({
   selector: 'app-administracion-page',
   standalone: true,
-  imports: [BotonGenerarReporteComponent, AsignarEquipoComponent, CrearEquipoComponent],
+  imports: [BotonGenerarReporteComponent, AsignarEquipoComponent, CrearEquipoComponent, DefinirRutaComponent],
   templateUrl: './administracion-page.html',
   styleUrls: ['./administracion-page.css']
 })

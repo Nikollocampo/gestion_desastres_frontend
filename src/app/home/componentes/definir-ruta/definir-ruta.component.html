@@ -1,0 +1,29 @@
+<form #rutaForm="ngForm" (ngSubmit)="definirRuta(rutaForm)">
+  <div>
+    <label>Origen:</label>
+    <select [(ngModel)]="origenId" name="origenId" required>
+      <option value="" disabled selected>Selecciona origen</option>
+      <option *ngFor="let u of ubicaciones" [value]="u.id">{{ u.nombre }}</option>
+    </select>
+  </div>
+  <div>
+    <label>Destino:</label>
+    <select [(ngModel)]="destinoId" name="destinoId" required>
+      <option value="" disabled selected>Selecciona destino</option>
+      <option *ngFor="let u of ubicaciones" [value]="u.id">{{ u.nombre }}</option>
+    </select>
+  </div>
+  <button type="submit" [disabled]="loading">{{ loading ? 'Definiendo...' : 'Definir Ruta' }}</button>
+</form>
+<div *ngIf="mensaje" [ngClass]="{'error': !resultado || resultado?.exito === false, 'mensaje': resultado?.exito}">{{ mensaje }}</div>
+<div *ngIf="resultado && resultado.exito" class="resultado">
+  <h4>Ruta definida correctamente</h4>
+  <ul>
+    <li><b>Origen:</b> {{ resultado.origen?.nombre }}</li>
+    <li><b>Destino:</b> {{ resultado.destino?.nombre }}</li>
+    <li><b>Distancia:</b> {{ resultado.distancia }} km</li>
+    <li><b>Peso:</b> {{ resultado.peso }}</li>
+    <li><b>Camino:</b> {{ resultado.camino?.join(' → ') }}</li>
+  </ul>
+</div>
+

@@ -40,25 +40,46 @@ export class CrearEquipoComponent implements OnInit {
     if (form.invalid) return;
     this.loading = true;
     this.mensaje = null;
-    const equipoAEnviar = {
-      idEquipo: this.equipo.idEquipo,
-      integrantesDisponibles: this.equipo.integrantesDisponibles,
-      tipoEquipo: this.equipo.tipoEquipo.toUpperCase(),
-      ubicacionId: this.equipo.ubicacionId
-    };
-    this.equipoService.crearEquipo(equipoAEnviar as any).subscribe({
-      next: (resp: EquipoResponseDto) => {
-        this.mensaje = resp.mensaje || 'Equipo creado correctamente';
-        this.exito = resp.exito ?? true;
-        this.loading = false;
-        form.resetForm();
-        // Notificar a la lista de asignar equipo
-        if ((window as any).equipoCreadoCallback) {
-          (window as any).equipoCreadoCallback();
+    // Buscar si ya existe un equipo con ese id
+    this.equipoService.listar().subscribe({
+      next: (equiposExistentes) => {
+        const equipoExistente = equiposExistentes.find(e => e.idEquipo === this.equipo.idEquipo);
+        let equipoAEnviar: any;
+        if (equipoExistente) {
+          // Sumar integrantes
+          equipoAEnviar = {
+            idEquipo: this.equipo.idEquipo,
+            integrantesDisponibles: equipoExistente.integrantesDisponibles + this.equipo.integrantesDisponibles,
+            tipoEquipo: this.equipo.tipoEquipo.toUpperCase(),
+            ubicacionId: this.equipo.ubicacionId
+          };
+        } else {
+          equipoAEnviar = {
+            idEquipo: this.equipo.idEquipo,
+            integrantesDisponibles: this.equipo.integrantesDisponibles,
+            tipoEquipo: this.equipo.tipoEquipo.toUpperCase(),
+            ubicacionId: this.equipo.ubicacionId
+          };
         }
+        this.equipoService.crearEquipo(equipoAEnviar as any).subscribe({
+          next: (resp: EquipoResponseDto) => {
+            this.mensaje = resp.mensaje || 'Equipo creado correctamente';
+            this.exito = resp.exito ?? true;
+            this.loading = false;
+            form.resetForm();
+            if ((window as any).equipoCreadoCallback) {
+              (window as any).equipoCreadoCallback();
+            }
+          },
+          error: (err) => {
+            this.mensaje = err?.error?.mensaje || 'Error al crear el equipo';
+            this.exito = false;
+            this.loading = false;
+          }
+        });
       },
-      error: (err) => {
-        this.mensaje = err?.error?.mensaje || 'Error al crear el equipo';
+      error: () => {
+        this.mensaje = 'Error al verificar equipos existentes';
         this.exito = false;
         this.loading = false;
       }
