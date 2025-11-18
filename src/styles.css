@@ -1,1 +1,53 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* =============================
+	 Tablas en página Administración
+	 Se aplica a cualquier <table> dentro de .administracion-page
+	 ============================= */
+.administracion-page .table-wrap {
+	width: 100%;
+	overflow-x: auto;
+}
+
+.administracion-page table {
+	width: 100%;
+	border-collapse: collapse;
+	background: #fff;
+	font-size: 0.95rem;
+}
+
+.administracion-page thead th {
+	text-align: left;
+	background: #fafafa;
+	border-bottom: 1px solid #ececec;
+	color: #444;
+	font-weight: 600;
+	padding: 10px 12px;
+}
+
+.administracion-page tbody td {
+	border-bottom: 1px solid #f1f1f1;
+	padding: 10px 12px;
+	vertical-align: top;
+}
+
+.administracion-page tbody tr:nth-child(even) {
+	background: #fcfcfe;
+}
+
+.administracion-page tbody tr:hover {
+	background: #f7f9ff;
+}
+
+/* Utilidades comunes */
+.administracion-page .text-right { text-align: right; }
+.administracion-page .text-center { text-align: center; }
+.administracion-page .badge {
+	display: inline-block;
+	padding: 2px 8px;
+	background: #e3f2fd;
+	color: #0d47a1;
+	border-radius: 999px;
+	font-size: 0.85em;
+	font-weight: 600;
+}

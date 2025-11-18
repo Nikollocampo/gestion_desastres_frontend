@@ -17,11 +17,19 @@
   margin: 0 0 0.6rem 0;
 }
 
-/* Rows */
-.desastre-row { padding: 8px 0; border-bottom: 1px solid #f0f0f0; }
-.desastre-row:last-child { border-bottom: none; }
-.row-main { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
-.left { display: flex; align-items: center; gap: 8px; min-width: 0; }
+/* Table */
+.table-wrap { width: 100%; overflow-x: auto; }
+.admin-table { width: 100%; border-collapse: collapse; background: #fff; }
+.admin-table thead th {
+  position: sticky; top: 0; z-index: 1;
+  background: rgba(66,165,245,0.15);
+  color: #222; font-weight: 700;
+}
+.admin-table th, .admin-table td {
+  border: 1px solid #e6e6e6; padding: 8px 10px; text-align: left;
+  font-family: 'Segoe UI', 'Arial', sans-serif; font-size: 0.9rem; color: #222;
+}
+.admin-table tbody tr:nth-child(odd) { background: #fafafa; }
 .nombre-desastre { font-weight: 600; }
 
 /* Priority chip */
@@ -40,8 +48,9 @@
 .personas-afectadas { color: #666; font-size: 0.92rem; }
 .personas-afectadas .count { font-weight: 700; color: #111; }
 
-/* Recursos list */
-.recursos-list { margin: 6px 0 0 16px; color: #555; font-size: 0.92rem; }
+/* Recursos sub-row */
+.recursos-row td { background: #fcfcfc; }
+.recursos-list { margin: 0; padding-left: 18px; color: #555; font-size: 0.9rem; }
 .recursos-list li { margin: 2px 0; }
 
 /* Empty state */

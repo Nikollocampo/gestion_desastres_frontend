@@ -46,6 +46,9 @@ export class AdministracionPage implements OnInit {
   resultadoAsignacion: {mensaje: string|null, exito: boolean|null, asignaciones: AsignacionRecurso[]} | null = null;
   desastresActualizar: DesastreActualizar[] = [];
   mensajeActualizacion: string|null = null;
+  // Paginación para resultado de asignaciones
+  page = 1;
+  pageSize = 4;
 
   constructor(
     private authService: AuthService,
@@ -100,6 +103,7 @@ export class AdministracionPage implements OnInit {
 
   onAsignacionRecursos(resultado: {mensaje: string|null, exito: boolean|null, asignaciones: AsignacionRecurso[]}) {
     this.resultadoAsignacion = resultado;
+    this.page = 1; // reiniciar a la primera página en cada nueva asignación
   }
 
   onActualizarSituacion(payload: { idDesastre: string, personasAfectadas: number, magnitud: number }) {
@@ -108,4 +112,24 @@ export class AdministracionPage implements OnInit {
       error: () => this.mensajeActualizacion = 'Error al actualizar la situación.'
     });
   }
+
+  // Helpers de paginación para la vista
+  get totalAsignaciones(): number {
+    return this.resultadoAsignacion?.asignaciones?.length ?? 0;
+  }
+  get totalPages(): number {
+    return Math.max(1, Math.ceil(this.totalAsignaciones / this.pageSize));
+  }
+  get startIndex(): number {
+    return (this.page - 1) * this.pageSize;
+  }
+  get endIndex(): number {
+    return this.startIndex + this.pageSize;
+  }
+  goToPage(n: number) {
+    if (this.totalPages === 0) return;
+    this.page = Math.min(this.totalPages, Math.max(1, n));
+  }
+  prevPage() { this.goToPage(this.page - 1); }
+  nextPage() { this.goToPage(this.page + 1); }
 }

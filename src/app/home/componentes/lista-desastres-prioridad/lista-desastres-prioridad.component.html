@@ -1,20 +1,36 @@
 <div *ngIf="desastres && desastres.length > 0; else sinDesastresCard" class="lista-desastres-card">
   <h2 class="card-title">Lista de desastres por prioridad</h2>
-  <div class="desastre-row" *ngFor="let d of desastres">
-    <div class="row-main">
-      <div class="left">
-        <span class="nombre-desastre">{{ d.nombre }}</span>
-        <span *ngIf="d.prioridad" class="chip" [ngClass]="prioridadClase(d.prioridad)">{{ d.prioridad }}</span>
-      </div>
-      <div class="right" *ngIf="d.personasAfectadas !== undefined">
-        <span class="personas-afectadas"><span class="count">{{ d.personasAfectadas }}</span> afectadas</span>
-      </div>
-    </div>
-    <ul class="recursos-list" *ngIf="d.recursos && d.recursos.length > 0">
-      <li *ngFor="let r of d.recursos">{{ r.tipo }}: {{ r.cantidad }}</li>
-    </ul>
+  <div class="table-wrap">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Desastre</th>
+          <th>Prioridad</th>
+          <th>Personas afectadas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let d of desastres">
+          <tr>
+            <td class="nombre-desastre">{{ d.nombre }}</td>
+            <td>
+              <span *ngIf="d.prioridad" class="chip" [ngClass]="prioridadClase(d.prioridad)">{{ d.prioridad }}</span>
+            </td>
+            <td class="personas-afectadas">
+              <span class="count">{{ d.personasAfectadas ?? 0 }}</span>
+            </td>
+          </tr>
+          <tr *ngIf="d.recursos && d.recursos.length > 0" class="recursos-row">
+            <td colspan="3">
+              <ul class="recursos-list">
+                <li *ngFor="let r of d.recursos">{{ r.tipo }}: {{ r.cantidad }}</li>
+              </ul>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
   </div>
-  
 </div>
 
 <ng-template #sinDesastresCard>

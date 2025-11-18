@@ -3,42 +3,76 @@
 
   <ng-container *ngIf="rol === 'ADMINISTRADOR'; else noAdmin">
     <section>
-      <div class="admin-toolbar">
-        <app-boton-generar-reporte></app-boton-generar-reporte>
-      </div>
-      <h3>Añadir equipo</h3>
-      <app-crear-equipo></app-crear-equipo>
-      <h3>Asignar equipo a desastre</h3>
-      <app-asignar-equipo></app-asignar-equipo>
-      <h3>Definir ruta</h3>
-      <app-definir-ruta></app-definir-ruta>
-      <app-asignar-recursos-prioridad (asignacionRealizada)="onAsignacionRecursos($event)"></app-asignar-recursos-prioridad>
-      <div *ngIf="resultadoAsignacion as res" class="resultado-asignacion-card">
-        <h3 class="card-title">Resultado de la asignación de recursos</h3>
-        <div class="estado-mensaje" [ngClass]="{ 'exito': res.exito, 'error': res.exito === false }">
-          {{ res.mensaje }}
+      
+      <div class="admin-two-col">
+        <div class="col">
+          <app-crear-equipo></app-crear-equipo>
+          <h3>Definir ruta</h3>
+          <app-definir-ruta></app-definir-ruta>
         </div>
-        <ng-container *ngIf="res.asignaciones.length > 0; else sinAsignaciones">
-          <ul class="asignaciones-list">
-            <li *ngFor="let asignacion of res.asignaciones">
-              <span class="desastre">{{ asignacion.desastre }}</span>
-              <ul class="recursos-list" *ngIf="asignacion.recursos.length > 0; else sinRecursos">
-                <li *ngFor="let recurso of asignacion.recursos">
-                  <span class="recurso-tipo">{{ recurso.tipo }}</span>: {{ recurso.cantidad }}
-                  <span class="razon">{{ recurso.razon }}</span>
-                </li>
-              </ul>
-              <ng-template #sinRecursos>
-                <span class="aviso">No se asignaron recursos a este desastre.</span>
-              </ng-template>
-            </li>
-          </ul>
-        </ng-container>
-        <ng-template #sinAsignaciones>
-          <span class="aviso">No se asignaron recursos a ningún desastre.</span>
-        </ng-template>
+        <div class="col">
+          <app-asignar-equipo></app-asignar-equipo>
+          <app-asignar-recursos-prioridad (asignacionRealizada)="onAsignacionRecursos($event)"></app-asignar-recursos-prioridad>
+
+          <!-- Resultado debajo del card de asignación -->
+          <div *ngIf="resultadoAsignacion as res" class="resultado-asignacion-card small">
+            <h3 class="card-title">Resultado de la asignación de recursos</h3>
+            <div class="estado-mensaje" [ngClass]="{ 'exito': res.exito, 'error': res.exito === false }">
+              {{ res.mensaje }}
+            </div>
+
+            <ng-container *ngIf="res.asignaciones.length > 0; else sinAsignaciones">
+              <div class="table-responsive">
+                <table class="tabla-asignaciones compact mini">
+                  <thead>
+                    <tr>
+                      <th style="width: 36%">Desastre</th>
+                      <th style="width: 26%">Recurso</th>
+                      <th style="width: 12%" class="text-right">Cant.</th>
+                      <th>Motivo</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let asignacion of res.asignaciones | slice: startIndex : endIndex">
+                      <ng-container *ngIf="asignacion.recursos.length > 0; else filaSinRecursos">
+                        <tr *ngFor="let recurso of asignacion.recursos; let i = index">
+                          <td *ngIf="i === 0" class="desastre desastre-cell" [attr.rowspan]="asignacion.recursos.length">{{ asignacion.desastre }}</td>
+                          <td>
+                            <span class="badge">{{ recurso.tipo }}</span>
+                          </td>
+                          <td class="text-right">{{ recurso.cantidad }}</td>
+                          <td class="razon">{{ recurso.razon }}</td>
+                        </tr>
+                      </ng-container>
+                      <ng-template #filaSinRecursos>
+                        <tr>
+                          <td class="celda-secundaria" colspan="4">
+                            <span class="aviso">No se asignaron recursos a este desastre.</span>
+                          </td>
+                        </tr>
+                      </ng-template>
+                    </ng-container>
+                  </tbody>
+                </table>
+                <div class="pager" *ngIf="totalAsignaciones > pageSize">
+                  <button class="btn" (click)="prevPage()" [disabled]="page === 1">Anterior</button>
+                  <span class="page-info">Página {{ page }} de {{ totalPages }}</span>
+                  <button class="btn" (click)="nextPage()" [disabled]="page === totalPages">Siguiente</button>
+                </div>
+              </div>
+            </ng-container>
+            <ng-template #sinAsignaciones>
+              <span class="aviso">No se asignaron recursos a ningún desastre.</span>
+            </ng-template>
+          </div>
+        </div>
       </div>
       <app-lista-desastres-prioridad [desastres]="desastres | ordenarPorPrioridad"></app-lista-desastres-prioridad>
+      
+      <!-- Botón mover a la parte inferior -->
+      <div class="admin-toolbar bottom">
+        <app-boton-generar-reporte></app-boton-generar-reporte>
+      </div>
     </section>
   </ng-container>
   <ng-template #noAdmin>
