@@ -1,4 +1,7 @@
-<button (click)="generarReporte()" [disabled]="loading">
-  {{ loading ? 'Generando...' : 'Generar Reporte' }}
-</button>
-<div *ngIf="mensaje" class="mensaje">{{ mensaje }}</div>
+<div class="report-cta">
+  <button class="primary large" (click)="generarReporte()" [disabled]="loading">
+    {{ loading ? 'Generando…' : 'Generar reporte' }}
+  </button>
+  <div *ngIf="mensaje" class="mensaje">{{ mensaje }}</div>
+  
+</div>

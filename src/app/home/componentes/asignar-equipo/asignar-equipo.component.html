@@ -1,21 +1,24 @@
-<form (ngSubmit)="asignarEquipo()">
-  <div>
-    <label>Desastre:</label>
-    <select [(ngModel)]="selectedDesastreId" name="desastre" required>
+<form class="asignar-equipo-card" (ngSubmit)="asignarEquipo()" autocomplete="off">
+  <h2 class="form-title">Asignar equipo a desastre</h2>
+  <div class="form-row">
+    <label for="desastre">Desastre:</label>
+    <select id="desastre" [(ngModel)]="selectedDesastreId" name="desastre" required>
       <option value="" disabled selected>Selecciona un desastre</option>
       <option *ngFor="let d of desastres" [value]="d.idDesastre">{{ d.nombre }}</option>
     </select>
   </div>
-  <div>
-    <label>Equipo:</label>
-    <select [(ngModel)]="selectedEquipoId" name="equipo" required>
+  <div class="form-row">
+    <label for="equipo">Equipo:</label>
+    <select id="equipo" [(ngModel)]="selectedEquipoId" name="equipo" required>
       <option value="" disabled selected>Selecciona un equipo</option>
-      <option *ngFor="let e of equipos" [value]="e.idEquipo">{{ e.idEquipo }} - {{ e.tipoEquipo }}</option>
+      <option *ngFor="let e of equipos" [value]="e.idEquipo">{{ e.idEquipo }} ({{ e.tipoEquipo }})</option>
     </select>
   </div>
-  <button type="submit" [disabled]="loading">{{ loading ? 'Asignando...' : 'Asignar Equipo' }}</button>
+  <div class="actions">
+    <button class="primary" type="submit" [disabled]="loading">{{ loading ? 'Asignando…' : 'Asignar equipo' }}</button>
+  </div>
+  <div *ngIf="mensaje" class="mensaje estado">{{ mensaje }}</div>
 </form>
-<div *ngIf="mensaje" class="mensaje">{{ mensaje }}</div>
 <div *ngIf="resultado && resultado.exito">
   <h4>Resultado de la asignación</h4>
   <ul>

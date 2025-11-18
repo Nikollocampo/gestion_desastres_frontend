@@ -1,4 +1,7 @@
-<button (click)="asignarRecursos()" [disabled]="loading">
-  {{ loading ? 'Asignando...' : 'Asignar recursos por prioridad' }}
-</button>
-<!-- La salida de asignación ahora se muestra en la página de administración -->
+<div class="asignar-recursos-card">
+  <h2 class="form-title">Asignar recursos por prioridad</h2>
+  <button class="primary large" (click)="asignarRecursos()" [disabled]="loading">
+    {{ loading ? 'Asignando…' : 'Asignar recursos por prioridad' }}
+  </button>
+  <!-- La salida de asignación se muestra en la página de administración -->
+</div>

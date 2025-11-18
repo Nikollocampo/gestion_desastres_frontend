@@ -3,41 +3,41 @@
 
   <ng-container *ngIf="rol === 'ADMINISTRADOR'; else noAdmin">
     <section>
-      <app-boton-generar-reporte></app-boton-generar-reporte>
+      <div class="admin-toolbar">
+        <app-boton-generar-reporte></app-boton-generar-reporte>
+      </div>
       <h3>Añadir equipo</h3>
       <app-crear-equipo></app-crear-equipo>
       <h3>Asignar equipo a desastre</h3>
       <app-asignar-equipo></app-asignar-equipo>
       <h3>Definir ruta</h3>
       <app-definir-ruta></app-definir-ruta>
-      <h3>Asignar recursos por prioridad</h3>
       <app-asignar-recursos-prioridad (asignacionRealizada)="onAsignacionRecursos($event)"></app-asignar-recursos-prioridad>
-      <div *ngIf="resultadoAsignacion as res">
-        <h4>Resultado de la asignación de recursos:</h4>
-        <div [ngClass]="{ 'exito': res.exito, 'error': res.exito === false }">
+      <div *ngIf="resultadoAsignacion as res" class="resultado-asignacion-card">
+        <h3 class="card-title">Resultado de la asignación de recursos</h3>
+        <div class="estado-mensaje" [ngClass]="{ 'exito': res.exito, 'error': res.exito === false }">
           {{ res.mensaje }}
         </div>
         <ng-container *ngIf="res.asignaciones.length > 0; else sinAsignaciones">
-          <ul>
+          <ul class="asignaciones-list">
             <li *ngFor="let asignacion of res.asignaciones">
-              <b>{{ asignacion.desastre }}</b>
-              <ul *ngIf="asignacion.recursos.length > 0; else sinRecursos">
+              <span class="desastre">{{ asignacion.desastre }}</span>
+              <ul class="recursos-list" *ngIf="asignacion.recursos.length > 0; else sinRecursos">
                 <li *ngFor="let recurso of asignacion.recursos">
-                  {{ recurso.tipo }}: {{ recurso.cantidad }}
-                  <span style="color: #888; font-size: 0.95em;">— {{ recurso.razon }}</span>
+                  <span class="recurso-tipo">{{ recurso.tipo }}</span>: {{ recurso.cantidad }}
+                  <span class="razon">{{ recurso.razon }}</span>
                 </li>
               </ul>
               <ng-template #sinRecursos>
-                <span style="color: #c00;">No se asignaron recursos a este desastre.</span>
+                <span class="aviso">No se asignaron recursos a este desastre.</span>
               </ng-template>
             </li>
           </ul>
         </ng-container>
         <ng-template #sinAsignaciones>
-          <span style="color: #c00;">No se asignaron recursos a ningún desastre.</span>
+          <span class="aviso">No se asignaron recursos a ningún desastre.</span>
         </ng-template>
       </div>
-      <h3>Lista de desastres por prioridad</h3>
       <app-lista-desastres-prioridad [desastres]="desastres | ordenarPorPrioridad"></app-lista-desastres-prioridad>
     </section>
   </ng-container>

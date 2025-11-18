@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 export interface DesastrePrioridad {
   nombre: string;
-  prioridad?: number;
+  prioridad?: string; // 'Alta' | 'Media' | 'Baja'
   personasAfectadas?: number;
   recursos?: { tipo: string; cantidad: number }[];
 }
@@ -17,5 +17,14 @@ export interface DesastrePrioridad {
 })
 export class ListaDesastresPrioridadComponent {
   @Input() desastres: DesastrePrioridad[] = [];
+
+  prioridadClase(p?: string): string {
+    if (!p) return '';
+    const v = p.toLowerCase();
+    if (v.includes('alta')) return 'alta';
+    if (v.includes('media')) return 'media';
+    if (v.includes('baja')) return 'baja';
+    return '';
+  }
 }
 

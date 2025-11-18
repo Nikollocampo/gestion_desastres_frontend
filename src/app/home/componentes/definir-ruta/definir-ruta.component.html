@@ -1,23 +1,31 @@
-<form #rutaForm="ngForm" (ngSubmit)="definirRuta(rutaForm)">
-  <div>
-    <label>Origen:</label>
-    <select [(ngModel)]="origenId" name="origenId" required>
+<form class="definir-ruta-card" #rutaForm="ngForm" (ngSubmit)="definirRuta(rutaForm)" autocomplete="off">
+  <h2 class="form-title">Definir ruta</h2>
+
+  <div class="form-row">
+    <label for="origen">Origen:</label>
+    <select id="origen" [(ngModel)]="origenId" name="origenId" required>
       <option value="" disabled selected>Selecciona origen</option>
       <option *ngFor="let u of ubicaciones" [value]="u.id">{{ u.nombre }}</option>
     </select>
   </div>
-  <div>
-    <label>Destino:</label>
-    <select [(ngModel)]="destinoId" name="destinoId" required>
+
+  <div class="form-row">
+    <label for="destino">Destino:</label>
+    <select id="destino" [(ngModel)]="destinoId" name="destinoId" required>
       <option value="" disabled selected>Selecciona destino</option>
       <option *ngFor="let u of ubicaciones" [value]="u.id">{{ u.nombre }}</option>
     </select>
   </div>
-  <button type="submit" [disabled]="loading">{{ loading ? 'Definiendo...' : 'Definir Ruta' }}</button>
+
+  <div class="actions">
+    <button class="primary" type="submit" [disabled]="loading">{{ loading ? 'Definiendo…' : 'Definir ruta' }}</button>
+  </div>
+
+  <div *ngIf="mensaje" [ngClass]="{'error': !resultado || resultado?.exito === false, 'mensaje': resultado?.exito}" class="estado">{{ mensaje }}</div>
 </form>
-<div *ngIf="mensaje" [ngClass]="{'error': !resultado || resultado?.exito === false, 'mensaje': resultado?.exito}">{{ mensaje }}</div>
-<div *ngIf="resultado && resultado.exito" class="resultado">
-  <h4>Ruta definida correctamente</h4>
+
+<div *ngIf="resultado && resultado.exito" class="resultado-card">
+  <h3>Ruta definida correctamente</h3>
   <ul>
     <li><b>Origen:</b> {{ resultado.origen?.nombre }}</li>
     <li><b>Destino:</b> {{ resultado.destino?.nombre }}</li>
@@ -25,5 +33,6 @@
     <li><b>Peso:</b> {{ resultado.peso }}</li>
     <li><b>Camino:</b> {{ resultado.camino?.join(' → ') }}</li>
   </ul>
+  
 </div>
 

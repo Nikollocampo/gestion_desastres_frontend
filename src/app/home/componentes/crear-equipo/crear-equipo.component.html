@@ -1,28 +1,37 @@
-<form #equipoForm="ngForm" (ngSubmit)="crearEquipo(equipoForm)">
-  <div>
-    <label>ID del equipo:</label>
-    <input [(ngModel)]="equipo.idEquipo" name="idEquipo" required />
+<form class="crear-equipo-card" #equipoForm="ngForm" (ngSubmit)="crearEquipo(equipoForm)" autocomplete="off">
+  <h2 class="form-title">Añadir equipo</h2>
+
+  <div class="form-row">
+    <label for="idEquipo">ID del equipo:</label>
+    <input id="idEquipo" [(ngModel)]="equipo.idEquipo" name="idEquipo" required placeholder="Ej: EQ-001" />
   </div>
-  <div>
-    <label>Tipo de equipo:</label>
-    <select [(ngModel)]="equipo.tipoEquipo" name="tipoEquipo" required>
+
+  <div class="form-row">
+    <label for="tipoEquipo">Tipo de equipo:</label>
+    <select id="tipoEquipo" [(ngModel)]="equipo.tipoEquipo" name="tipoEquipo" required>
       <option value="" disabled selected>Selecciona un tipo</option>
       <option value="BOMBEROS">Bomberos</option>
       <option value="MEDICOS">Médicos</option>
       <option value="POLICIAS">Policías</option>
     </select>
   </div>
-  <div>
-    <label>Integrantes disponibles:</label>
-    <input type="number" [(ngModel)]="equipo.integrantesDisponibles" name="integrantesDisponibles" required min="1" />
+
+  <div class="form-row">
+    <label for="integrantes">Integrantes disponibles:</label>
+    <input id="integrantes" type="number" inputmode="numeric" [(ngModel)]="equipo.integrantesDisponibles" name="integrantesDisponibles" required min="1" placeholder="Ej: 8" />
   </div>
-  <div>
-    <label>Ubicación:</label>
-    <select [(ngModel)]="equipo.ubicacionId" name="ubicacionId" required>
+
+  <div class="form-row">
+    <label for="ubicacionId">Ubicación:</label>
+    <select id="ubicacionId" [(ngModel)]="equipo.ubicacionId" name="ubicacionId" required>
       <option value="" disabled selected>Selecciona una ubicación</option>
-      <option *ngFor="let u of ubicaciones" [value]="u.id">{{ u.nombre }} - {{ u.id }}</option>
+      <option *ngFor="let u of ubicaciones" [value]="u.id">{{ u.nombre }}</option>
     </select>
   </div>
-  <button type="submit" [disabled]="loading">{{ loading ? 'Añadiendo...' : 'Añadir Equipo' }}</button>
+
+  <div class="actions">
+    <button class="primary" type="submit" [disabled]="loading">{{ loading ? 'Añadiendo…' : 'Añadir Equipo' }}</button>
+  </div>
+
+  <div *ngIf="mensaje" [ngClass]="{'exito': exito, 'error': exito === false}" class="estado">{{ mensaje }}</div>
 </form>
-<div *ngIf="mensaje" [ngClass]="{'exito': exito, 'error': exito === false}">{{ mensaje }}</div>

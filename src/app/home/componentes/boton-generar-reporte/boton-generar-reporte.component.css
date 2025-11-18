@@ -1,10 +1,42 @@
-.mensaje {
-  margin-top: 10px;
-  color: #1976d2;
-  font-weight: bold;
+/* Contenedor CTA */
+.report-cta {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
 }
-button[disabled] {
-  opacity: 0.6;
+
+/* Botón primario grande */
+.primary.large {
+  padding: 0.45rem 1rem;
+  background: #42a5f5;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(66,165,245,0.35);
+  transition: background 0.2s, transform 0.02s, box-shadow 0.2s;
+}
+.primary.large:hover {
+  background: #2366b8;
+  box-shadow: 0 4px 14px rgba(66,165,245,0.35);
+}
+.primary.large:active {
+  transform: translateY(1px);
+}
+.primary.large[disabled] {
+  background: #e0e0e0;
+  color: #aaa;
   cursor: not-allowed;
+  box-shadow: none;
+}
+
+.mensaje {
+  color: #1976d2;
+  font-weight: 600;
+  font-size: 0.85rem;
 }
 
