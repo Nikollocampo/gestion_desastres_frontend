@@ -39,7 +39,7 @@
         </ng-template>
       </div>
       <h3>Lista de desastres por prioridad</h3>
-      <app-lista-desastres-prioridad [desastres]="desastres"></app-lista-desastres-prioridad>
+      <app-lista-desastres-prioridad [desastres]="desastres | ordenarPorPrioridad"></app-lista-desastres-prioridad>
     </section>
   </ng-container>
   <ng-template #noAdmin>
@@ -53,6 +53,8 @@
         <div *ngIf="mensajeActualizacion" style="margin-top: 1em; color: #0074d9;">
           {{ mensajeActualizacion }}
         </div>
+        <h3>Gestionar evacuaciones</h3>
+        <app-gestionar-evacuaciones [evacuaciones]="evacuaciones"></app-gestionar-evacuaciones>
       </section>
     </ng-container>
     <ng-template #noRol>
