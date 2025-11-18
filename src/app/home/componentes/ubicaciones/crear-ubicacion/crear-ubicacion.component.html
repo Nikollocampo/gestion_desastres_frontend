@@ -1,0 +1,28 @@
+<div class="crear-ubicacion-container">
+  <h2>Crear Ubicación</h2>
+  <form #ubicacionForm="ngForm" (ngSubmit)="crearUbicacion(ubicacionForm)">
+    <div>
+      <label for="nombre">Nombre:</label>
+      <input id="nombre" name="nombre" [(ngModel)]="nombre" required maxlength="60" />
+    </div>
+    <div>
+      <label for="calle">Calle:</label>
+      <input id="calle" name="calle" [(ngModel)]="calle" required maxlength="60" />
+    </div>
+    <div>
+      <label for="carrera">Carrera:</label>
+      <input id="carrera" name="carrera" [(ngModel)]="carrera" required maxlength="60" />
+    </div>
+    <div>
+      <label for="tipoUbicacion">Tipo de Ubicación:</label>
+      <select id="tipoUbicacion" name="tipoUbicacion" [(ngModel)]="tipoUbicacion" required>
+        <option value="" disabled selected>Seleccione un tipo</option>
+        <option value="REFUGIO">Refugio</option>
+        <option value="CENTRO_AYUDA">Centro de Ayuda</option>
+      </select>
+    </div>
+    <button type="submit" [disabled]="cargando || ubicacionForm.invalid">Crear Ubicación</button>
+  </form>
+  <div *ngIf="mensaje" class="mensaje">{{ mensaje }}</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+</div>

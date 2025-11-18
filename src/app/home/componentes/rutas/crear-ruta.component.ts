@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RutaService } from '../../services/ruta.service';
 import { UbicacionService, UbicacionResponseDto } from '../../services/ubicacion.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-crear-ruta',
@@ -12,7 +13,7 @@ import { UbicacionService, UbicacionResponseDto } from '../../services/ubicacion
   styleUrls: ['./crear-ruta.component.css']
 })
 
-export class CrearRutaComponent implements OnInit {
+export class CrearRutaComponent implements OnInit, OnDestroy {
   origenId: string = '';
   destinoId: string = '';
   distancia: number | null = null;
@@ -20,10 +21,17 @@ export class CrearRutaComponent implements OnInit {
   error: string | null = null;
   cargando = false;
   ubicaciones: UbicacionResponseDto[] = [];
+  private subs = new Subscription();
 
   constructor(private rutaService: RutaService, private ubicacionService: UbicacionService) {}
 
   ngOnInit(): void {
+    this.cargarUbicaciones();
+    const s = this.ubicacionService.refresh$.subscribe(() => this.cargarUbicaciones());
+    this.subs.add(s);
+  }
+
+  private cargarUbicaciones() {
     this.ubicacionService.listar().subscribe({
       next: (data) => {
         this.ubicaciones = data;
@@ -32,6 +40,10 @@ export class CrearRutaComponent implements OnInit {
         this.ubicaciones = [];
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
 
   crearRuta() {

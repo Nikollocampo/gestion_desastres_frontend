@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 export interface UbicacionRequestDto {
   nombre: string;
@@ -22,11 +23,15 @@ export interface UbicacionResponseDto {
 })
 export class UbicacionService {
   private apiUrl = 'http://localhost:8080/api/ubicaciones';
+  private refreshSubject = new Subject<void>();
+  refresh$ = this.refreshSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
   crear(dto: UbicacionRequestDto): Observable<UbicacionResponseDto> {
-    return this.http.post<UbicacionResponseDto>(`${this.apiUrl}/crear`, dto);
+    return this.http
+      .post<UbicacionResponseDto>(`${this.apiUrl}/crear`, dto)
+      .pipe(tap(() => this.refreshSubject.next()));
   }
 
   listar(): Observable<UbicacionResponseDto[]> {

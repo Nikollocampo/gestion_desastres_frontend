@@ -1,7 +1,14 @@
 <div class="rutas-estadisticas-page">
   <div class="rutas-grid">
-    <app-crear-ruta></app-crear-ruta>
-    <app-lista-rutas></app-lista-rutas>
+    <div class="col-left">
+      <app-crear-ubicacion></app-crear-ubicacion>
+      <app-lista-rutas></app-lista-rutas>
+    </div>
+    <div class="col-right">
+      <app-crear-ruta></app-crear-ruta>
+    </div>
   </div>
-  <app-lista-ubicaciones></app-lista-ubicaciones>
+  <div class="grid-wide">
+    <app-lista-ubicaciones></app-lista-ubicaciones>
+  </div>
 </div>
