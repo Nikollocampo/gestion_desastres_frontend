@@ -1,0 +1,4 @@
+<button (click)="generarReporte()" [disabled]="loading">
+  {{ loading ? 'Generando...' : 'Generar Reporte' }}
+</button>
+<div *ngIf="mensaje" class="mensaje">{{ mensaje }}</div>
