@@ -38,6 +38,9 @@ export class DesastreService {
 
   obtenerTodos(): Observable<Desastre[]> {
     return this.http.get<Desastre[]>(`${this.apiUrl}/get`);
- 
+  }
+
+  actualizarDesastre(desastre: Desastre): Observable<Desastre> {
+    return this.http.put<Desastre>(`${this.apiUrl}/actualizar`, desastre);
   }
 }
