@@ -24,15 +24,17 @@
   <div *ngIf="mensaje" [ngClass]="{'error': !resultado || resultado?.exito === false, 'mensaje': resultado?.exito}" class="estado">{{ mensaje }}</div>
 </form>
 
-<div *ngIf="resultado && resultado.exito" class="resultado-card">
-  <h3>Ruta definida correctamente</h3>
-  <ul>
-    <li><b>Origen:</b> {{ resultado.origen?.nombre }}</li>
-    <li><b>Destino:</b> {{ resultado.destino?.nombre }}</li>
-    <li><b>Distancia:</b> {{ resultado.distancia }} km</li>
-    <li><b>Peso:</b> {{ resultado.peso }}</li>
-    <li><b>Camino:</b> {{ resultado.camino?.join(' → ') }}</li>
-  </ul>
-  
+<div *ngIf="resultado && resultado.exito" class="modal-flotante-backdrop">
+  <div class="modal-flotante">
+    <button class="cerrar-modal" (click)="resultado = null" title="Cerrar">×</button>
+    <h3>Ruta definida correctamente</h3>
+    <ul>
+      <li><b>Origen:</b> {{ resultado.origen?.nombre }}</li>
+      <li><b>Destino:</b> {{ resultado.destino?.nombre }}</li>
+      <li><b>Distancia:</b> {{ resultado.distancia }} km</li>
+      <li><b>Peso:</b> {{ resultado.peso }}</li>
+      <li><b>Camino:</b> {{ resultado.camino?.join(' → ') }}</li>
+    </ul>
+  </div>
 </div>
 

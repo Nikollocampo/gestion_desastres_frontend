@@ -1,4 +1,14 @@
 <div class="administracion-page">
+  <ng-container *ngIf="rol === 'ADMINISTRADOR'">
+    <header class="admin-header">
+      <h1>Panel de Administración</h1>
+    </header>
+  </ng-container>
+  <ng-container *ngIf="rol === 'OPERADOR_EMERGENCIA'">
+    <header class="operador-header">
+      <h1>Panel de Operador de Emergencia</h1>
+    </header>
+  </ng-container>
 
 
   <ng-container *ngIf="rol === 'ADMINISTRADOR'; else noAdmin">

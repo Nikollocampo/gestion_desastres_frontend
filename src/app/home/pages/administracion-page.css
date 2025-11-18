@@ -1,3 +1,25 @@
+.operador-header {
+  margin-bottom: 18px;
+  text-align: left;
+}
+.operador-header h1 {
+  color: #1976d2;
+  font-size: 2.1rem;
+  margin: 0 0 0.2em 0;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.admin-header {
+  margin-bottom: 18px;
+  text-align: left;
+}
+.admin-header h1 {
+  color: #111;
+  font-size: 2.1rem;
+  margin: 0 0 0.2em 0;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
 .administracion-page {
   padding: 32px;
 }
