@@ -1,6 +1,11 @@
 <div class="registrar-desastre-container">
   <h2>Registrar Desastre</h2>
+
   <form #form="ngForm" (ngSubmit)="registrar(form)">
+    <div>
+      <label for="idDesastre">ID:</label>
+      <input id="idDesastre" name="idDesastre" [(ngModel)]="idDesastre" maxlength="40" placeholder="ID único" />
+    </div>
     <div>
       <label for="nombre">Nombre:</label>
       <input id="nombre" name="nombre" [(ngModel)]="nombre" required maxlength="80" />

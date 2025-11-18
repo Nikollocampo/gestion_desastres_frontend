@@ -30,6 +30,7 @@ export interface Desastre {
 }
 
 export interface DesastreRequestDto {
+  idDesastre?: string;
   idUbicacion: string;
   equiposIds?: string[];
   nombre?: string;
