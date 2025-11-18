@@ -1,0 +1,16 @@
+button {
+  margin-bottom: 10px;
+  font-size: 1em;
+  padding: 6px 16px;
+}
+.exito {
+  color: #388e3c;
+}
+.error {
+  color: #d32f2f;
+}
+.mensaje {
+  color: #1976d2;
+  font-weight: bold;
+  margin-top: 10px;
+}

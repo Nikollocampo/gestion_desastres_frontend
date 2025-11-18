@@ -1,7 +1,7 @@
 <div class="administracion-page">
   <h1>Administración</h1>
 
-  @if (rol === 'ADMINISTRADOR') {
+  <ng-container *ngIf="rol === 'ADMINISTRADOR'; else noAdmin">
     <section>
       <h2>Panel de Administrador</h2>
       <p>Gestiona la configuración general del sistema y los recursos.</p>
@@ -17,20 +17,51 @@
       <app-asignar-equipo></app-asignar-equipo>
       <h3>Definir ruta</h3>
       <app-definir-ruta></app-definir-ruta>
+      <h3>Asignar recursos por prioridad</h3>
+      <app-asignar-recursos-prioridad (asignacionRealizada)="onAsignacionRecursos($event)"></app-asignar-recursos-prioridad>
+      <div *ngIf="resultadoAsignacion as res">
+        <h4>Resultado de la asignación de recursos:</h4>
+        <div [ngClass]="{ 'exito': res.exito, 'error': res.exito === false }">
+          {{ res.mensaje }}
+        </div>
+        <ng-container *ngIf="res.asignaciones.length > 0; else sinAsignaciones">
+          <ul>
+            <li *ngFor="let asignacion of res.asignaciones">
+              <b>{{ asignacion.desastre }}</b>
+              <ul *ngIf="asignacion.recursos.length > 0; else sinRecursos">
+                <li *ngFor="let recurso of asignacion.recursos">
+                  {{ recurso.tipo }}: {{ recurso.cantidad }}
+                  <span style="color: #888; font-size: 0.95em;">— {{ recurso.razon }}</span>
+                </li>
+              </ul>
+              <ng-template #sinRecursos>
+                <span style="color: #c00;">No se asignaron recursos a este desastre.</span>
+              </ng-template>
+            </li>
+          </ul>
+        </ng-container>
+        <ng-template #sinAsignaciones>
+          <span style="color: #c00;">No se asignaron recursos a ningún desastre.</span>
+        </ng-template>
+      </div>
     </section>
-  } @else if (rol === 'OPERADOR_EMERGENCIA') {
-    <section>
-      <h2>Panel de Operador de Emergencia</h2>
-      <p>Accede rápidamente a tareas operativas del día a día.</p>
-      <ul>
-        <li>Reportar y actualizar incidentes</li>
-        <li>Actualizar estado de recursos</li>
-        <li>Consultar zonas afectadas</li>
-      </ul>
-    </section>
-  } @else {
-    <section>
-      <p>Rol no reconocido o no establecido. Inicia sesión nuevamente.</p>
-    </section>
-  }
+  </ng-container>
+  <ng-template #noAdmin>
+    <ng-container *ngIf="rol === 'OPERADOR_EMERGENCIA'; else noRol">
+      <section>
+        <h2>Panel de Operador de Emergencia</h2>
+        <p>Accede rápidamente a tareas operativas del día a día.</p>
+        <ul>
+          <li>Reportar y actualizar incidentes</li>
+          <li>Actualizar estado de recursos</li>
+          <li>Consultar zonas afectadas</li>
+        </ul>
+      </section>
+    </ng-container>
+    <ng-template #noRol>
+      <section>
+        <p>Rol no reconocido o no establecido. Inicia sesión nuevamente.</p>
+      </section>
+    </ng-template>
+  </ng-template>
 </div>
