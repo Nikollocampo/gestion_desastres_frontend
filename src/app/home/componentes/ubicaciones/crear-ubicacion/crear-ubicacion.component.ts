@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { UbicacionService, UbicacionRequestDto } from '../../../services/ubicacion.service';
+import { UbicacionService, UbicacionRequestDto } from '../../../pages/services/ubicacion.service';
 
 @Component({
   selector: 'app-crear-ubicacion',

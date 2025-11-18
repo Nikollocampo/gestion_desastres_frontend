@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RutaService } from '../../services/ruta.service';
-import { UbicacionService, UbicacionResponseDto } from '../../services/ubicacion.service';
+import { RutaService } from '../../pages/services/ruta.service';
+import { UbicacionService, UbicacionResponseDto } from '../../pages/services/ubicacion.service';
 import { Subscription } from 'rxjs';
 
 @Component({

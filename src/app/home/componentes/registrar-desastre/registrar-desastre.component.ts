@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
-import { DesastreService, DesastreRequestDto } from '../../services/desastre.service';
-import { UbicacionService, UbicacionResponseDto } from '../../services/ubicacion.service';
+import { DesastreService, DesastreRequestDto } from '../../pages/services/desastre.service';
+import { UbicacionService, UbicacionResponseDto } from '../../pages/services/ubicacion.service';
 
 @Component({
   selector: 'app-registrar-desastre',

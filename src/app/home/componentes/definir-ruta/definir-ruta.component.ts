@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AdministradorService } from '../../services/administrador.service';
-import { UbicacionService, UbicacionResponseDto } from '../../services/ubicacion.service';
+import { AdministradorService } from '../../pages/services/administrador.service';
+import { UbicacionService, UbicacionResponseDto } from '../../pages/services/ubicacion.service';
 import { NgForm, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 

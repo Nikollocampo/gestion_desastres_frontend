@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UbicacionService, UbicacionResponseDto } from '../../services/ubicacion.service';
+import { UbicacionService, UbicacionResponseDto } from '../../pages/services/ubicacion.service';
 
 @Component({
   selector: 'app-lista-ubicaciones',

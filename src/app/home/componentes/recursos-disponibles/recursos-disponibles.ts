@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RecursosService, RecursoDisponible } from '../../services/recursos.service';
+import { RecursosService, RecursoDisponible } from '../../pages/services/recursos.service';
 
 @Component({
   selector: 'app-recursos-disponibles',

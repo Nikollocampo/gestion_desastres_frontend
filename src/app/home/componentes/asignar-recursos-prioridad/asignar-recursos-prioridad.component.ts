@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { AdministradorService } from '../../services/administrador.service';
+import { AdministradorService } from '../../pages/services/administrador.service';
 import { CommonModule } from '@angular/common';
 
 export interface AsignacionRecurso {
