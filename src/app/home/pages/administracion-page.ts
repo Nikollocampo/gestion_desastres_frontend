@@ -11,9 +11,10 @@ import { ListaDesastresPrioridadComponent } from '../componentes/lista-desastres
 import { MonitorearUbicacionesComponent } from '../componentes/monitorear-ubicaciones/monitorear-ubicaciones.component';
 import { OperadorService } from './services/operador.service';
 import { ActualizarSituacionDesastreComponent, DesastreActualizar } from '../componentes/actualizar-situacion-desastre/actualizar-situacion-desastre.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrdenarPorPrioridadPipe } from '../pipes/ordenar-por-prioridad.pipe';
 import { GestionarEvacuacionesComponent } from '../componentes/gestionar-evacuaciones/gestionar-evacuaciones.component';
+import { CrearRecursoComponent } from '../componentes/crear-recurso/crear-recurso.component';
 
 @Component({
   selector: 'app-administracion-page',
@@ -21,6 +22,7 @@ import { GestionarEvacuacionesComponent } from '../componentes/gestionar-evacuac
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     BotonGenerarReporteComponent,
     AsignarEquipoComponent,
     CrearEquipoComponent,
@@ -30,7 +32,8 @@ import { GestionarEvacuacionesComponent } from '../componentes/gestionar-evacuac
     MonitorearUbicacionesComponent,
     ActualizarSituacionDesastreComponent,
     OrdenarPorPrioridadPipe,
-    GestionarEvacuacionesComponent
+    GestionarEvacuacionesComponent,
+    CrearRecursoComponent
   ],
   templateUrl: './administracion-page.html',
   styleUrls: ['./administracion-page.css']

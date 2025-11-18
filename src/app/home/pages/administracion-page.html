@@ -1,11 +1,12 @@
 <div class="administracion-page">
-  
+
 
   <ng-container *ngIf="rol === 'ADMINISTRADOR'; else noAdmin">
     <section>
-      
+
       <div class="admin-two-col">
         <div class="col">
+          <app-crear-recurso></app-crear-recurso>
           <app-crear-equipo></app-crear-equipo>
           <h3>Definir ruta</h3>
           <app-definir-ruta></app-definir-ruta>
@@ -68,7 +69,7 @@
         </div>
       </div>
       <app-lista-desastres-prioridad [desastres]="desastres | ordenarPorPrioridad"></app-lista-desastres-prioridad>
-      
+
       <!-- Botón mover a la parte inferior -->
       <div class="admin-toolbar bottom">
         <app-boton-generar-reporte></app-boton-generar-reporte>

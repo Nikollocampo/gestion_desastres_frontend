@@ -29,4 +29,8 @@ export class RecursosService {
   listarRecursos(): Observable<RecursoDisponible[]> {
     return this.http.get<RecursoDisponible[]>(`${this.apiUrl}/listar`);
   }
+
+  crearRecurso(recurso: RecursoDisponible): Observable<RecursoDisponible> {
+    return this.http.post<RecursoDisponible>(`${this.apiUrl}/crear`, recurso);
+  }
 }

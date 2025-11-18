@@ -1,0 +1,70 @@
+<div class="crear-recurso">
+  <h2>Crear Recurso</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+      <label>Nombre</label>
+      <input formControlName="nombre" />
+      <div *ngIf="form.get('nombre')?.touched && form.get('nombre')?.invalid">Nombre requerido</div>
+    </div>
+
+    <div>
+      <label>Tipo</label>
+      <select formControlName="tipo">
+        <option value="">-- Seleccione --</option>
+        <option *ngFor="let t of tipos" [value]="t">{{t}}</option>
+      </select>
+      <div *ngIf="form.get('tipo')?.touched && form.get('tipo')?.invalid">Tipo requerido</div>
+    </div>
+
+    <div>
+      <label>Cantidad</label>
+      <input type="number" formControlName="cantidad" />
+    </div>
+
+    <!-- Selección de ubicaciones existentes o crear nueva -->
+    <div>
+      <label>Ubicación</label>
+      <select formControlName="ubicacionSeleccionada">
+        <option value="">-- Seleccione una ubicación --</option>
+        <option *ngFor="let u of ubicaciones" [value]="u.id">{{ u.nombre }} ({{ u.id }})</option>
+        <option value="new">Crear nueva ubicación</option>
+      </select>
+      <button type="button" (click)="toggleDetalles()" style="margin-left:8px">{{ showDetallesUbicacion ? 'Ocultar detalles' : 'Mostrar detalles' }}</button>
+    </div>
+
+    <fieldset *ngIf="showDetallesUbicacion" formGroupName="ubicacion">
+      <legend>Detalles ubicación</legend>
+      <div>
+        <label>ID Ubicación</label>
+        <input formControlName="id" [readonly]="!showNuevaUbicacion && form.get('ubicacion')?.disabled" />
+        <div *ngIf="form.get('ubicacion.id')?.touched && form.get('ubicacion.id')?.invalid">ID requerido</div>
+      </div>
+      <div>
+        <label>Nombre Ubicación</label>
+        <input formControlName="nombre" [readonly]="!showNuevaUbicacion && form.get('ubicacion')?.disabled" />
+        <div *ngIf="form.get('ubicacion.nombre')?.touched && form.get('ubicacion.nombre')?.invalid">Nombre de ubicación requerido</div>
+      </div>
+      <div>
+        <label>Tipo Ubicación</label>
+        <input formControlName="tipoUbicacion" [readonly]="!showNuevaUbicacion && form.get('ubicacion')?.disabled" />
+        <div *ngIf="form.get('ubicacion.tipoUbicacion')?.touched && form.get('ubicacion.tipoUbicacion')?.invalid">Tipo de ubicación requerido</div>
+      </div>
+      <div>
+        <label>Calle</label>
+        <input formControlName="calle" [readonly]="!showNuevaUbicacion && form.get('ubicacion')?.disabled" />
+      </div>
+      <div>
+        <label>Carrera</label>
+        <input formControlName="carrera" [readonly]="!showNuevaUbicacion && form.get('ubicacion')?.disabled" />
+      </div>
+    </fieldset>
+
+    <div>
+      <button type="submit" [disabled]="submitting">Crear</button>
+    </div>
+
+    <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  </form>
+</div>
