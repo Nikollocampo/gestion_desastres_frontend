@@ -10,6 +10,15 @@
   font-family: 'Segoe UI', 'Arial', sans-serif;
 }
 
+.actualizar-form .form-title {
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+  color: #111;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
 .actualizar-form .form-row { 
   margin-bottom: 0.55rem;
 }

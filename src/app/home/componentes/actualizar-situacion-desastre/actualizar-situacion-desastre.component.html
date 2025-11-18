@@ -1,4 +1,5 @@
 <form class="actualizar-form" (ngSubmit)="enviarActualizacion()" autocomplete="off">
+  <h2 class="form-title">Actualizar situación de un desastre</h2>
   <div class="form-row">
     <label for="desastre">Selecciona un desastre:</label>
     <select id="desastre" [(ngModel)]="selectedId" name="desastre" (change)="seleccionarDesastre(selectedId)" required>

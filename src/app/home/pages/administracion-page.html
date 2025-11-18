@@ -44,14 +44,17 @@
   <ng-template #noAdmin>
     <ng-container *ngIf="rol === 'OPERADOR_EMERGENCIA'; else noRol">
       <section>
-        
-        <app-monitorear-ubicaciones [ubicaciones]="ubicacionesMonitoreo"></app-monitorear-ubicaciones>
-        <h3>Actualizar situación de un desastre</h3>
-        <app-actualizar-situacion-desastre [desastres]="desastresActualizar" (actualizar)="onActualizarSituacion($event)"></app-actualizar-situacion-desastre>
-        <div *ngIf="mensajeActualizacion" style="margin-top: 1em; color: #0074d9;">
-          {{ mensajeActualizacion }}
+        <div class="operador-grid">
+          <div class="col-left">
+            <app-monitorear-ubicaciones [ubicaciones]="ubicacionesMonitoreo"></app-monitorear-ubicaciones>
+          </div>
+          <div class="col-right">
+            <app-actualizar-situacion-desastre [desastres]="desastresActualizar" (actualizar)="onActualizarSituacion($event)"></app-actualizar-situacion-desastre>
+            <div *ngIf="mensajeActualizacion" style="margin-top: 1em; color: #0074d9;">
+              {{ mensajeActualizacion }}
+            </div>
+          </div>
         </div>
-        <h3>Gestionar evacuaciones</h3>
         <app-gestionar-evacuaciones [evacuaciones]="evacuaciones"></app-gestionar-evacuaciones>
       </section>
     </ng-container>

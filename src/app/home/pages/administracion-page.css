@@ -6,3 +6,31 @@
   font-size: 2rem;
   margin-bottom: 16px;
 }
+
+/* Unificar tipografía y estilo de subtítulos (h3) en Operador */
+.administracion-page h3 {
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  color: #111;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  margin: 0 0 0.6rem 0;
+}
+
+/* Layout operador: dos columnas, con panel derecho fijo */
+.operador-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* móvil: una columna */
+  gap: 16px;
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .operador-grid {
+    grid-template-columns: minmax(320px, 1fr) 420px; /* izquierda fluida, derecha fija */
+  }
+}
+
+.operador-grid .col-right {
+  max-width: 420px;
+}
