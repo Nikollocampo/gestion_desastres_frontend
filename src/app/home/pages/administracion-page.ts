@@ -7,6 +7,7 @@ import { AsignarEquipoComponent } from '../componentes/asignar-equipo/asignar-eq
 import { CrearEquipoComponent } from '../componentes/crear-equipo/crear-equipo.component';
 import { DefinirRutaComponent } from '../componentes/definir-ruta/definir-ruta.component';
 import { AsignarRecursosPrioridadComponent, AsignacionRecurso } from '../componentes/asignar-recursos-prioridad/asignar-recursos-prioridad.component';
+import { ListaDesastresPrioridadComponent } from '../componentes/lista-desastres-prioridad/lista-desastres-prioridad.component';
 
 @Component({
   selector: 'app-administracion-page',
@@ -17,7 +18,8 @@ import { AsignarRecursosPrioridadComponent, AsignacionRecurso } from '../compone
     AsignarEquipoComponent,
     CrearEquipoComponent,
     DefinirRutaComponent,
-    AsignarRecursosPrioridadComponent
+    AsignarRecursosPrioridadComponent,
+    ListaDesastresPrioridadComponent
   ],
   templateUrl: './administracion-page.html',
   styleUrls: ['./administracion-page.css']
