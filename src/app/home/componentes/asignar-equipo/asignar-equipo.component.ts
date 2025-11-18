@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { AdministradorService } from '../../services/administrador.service';
 import { DesastreService, Desastre } from '../../services/desastre.service';
 import { EquipoService, Equipo } from '../../services/equipo.service';
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './asignar-equipo.component.html',
   styleUrls: ['./asignar-equipo.component.css']
 })
-export class AsignarEquipoComponent {
+export class AsignarEquipoComponent implements OnInit {
   desastres: Desastre[] = [];
   equipos: Equipo[] = [];
   selectedDesastreId: string = '';
@@ -27,7 +27,13 @@ export class AsignarEquipoComponent {
     private adminService: AdministradorService,
     private desastreService: DesastreService,
     private equipoService: EquipoService
-  ) {
+  ) {}
+
+  ngOnInit(): void {
+    // Suscribirse al callback de creación de equipo
+    (window as any).equipoCreadoCallback = () => {
+      this.cargarEquipos();
+    };
     this.cargarDesastres();
     this.cargarEquipos();
   }

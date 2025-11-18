@@ -1,0 +1,33 @@
+.exito {
+  color: #1976d2;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.error {
+  color: #d32f2f;
+  font-weight: bold;
+  margin-top: 10px;
+}
+form > div, fieldset > div {
+  margin-bottom: 10px;
+}
+label {
+  display: inline-block;
+  width: 160px;
+}
+input {
+  padding: 4px;
+}
+button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+fieldset {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+legend {
+  font-weight: bold;
+}
+
