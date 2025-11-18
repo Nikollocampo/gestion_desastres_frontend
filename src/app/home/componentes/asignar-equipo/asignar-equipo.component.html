@@ -1,0 +1,30 @@
+<form (ngSubmit)="asignarEquipo()">
+  <div>
+    <label>Desastre:</label>
+    <select [(ngModel)]="selectedDesastreId" name="desastre" required>
+      <option value="" disabled selected>Selecciona un desastre</option>
+      <option *ngFor="let d of desastres" [value]="d.idDesastre">{{ d.nombre }}</option>
+    </select>
+  </div>
+  <div>
+    <label>Equipo:</label>
+    <select [(ngModel)]="selectedEquipoId" name="equipo" required>
+      <option value="" disabled selected>Selecciona un equipo</option>
+      <option *ngFor="let e of equipos" [value]="e.idEquipo">{{ e.idEquipo }} - {{ e.tipoEquipo }}</option>
+    </select>
+  </div>
+  <button type="submit" [disabled]="loading">{{ loading ? 'Asignando...' : 'Asignar Equipo' }}</button>
+</form>
+<div *ngIf="mensaje" class="mensaje">{{ mensaje }}</div>
+<div *ngIf="resultado && resultado.exito">
+  <h4>Resultado de la asignación</h4>
+  <ul>
+    <li>Prioridad del desastre: {{ resultado.prioridadDesastre }}</li>
+    <li>Personal requerido: {{ resultado.personalRequerido }}</li>
+    <li>Distancia de la ruta: {{ resultado.distanciaRuta }} km</li>
+    <li>Tiempo estimado: {{ resultado.tiempoEstimadoMinutos | number:'1.0-2' }} minutos</li>
+    <li>Camino: {{ resultado.camino?.join(' → ') }}</li>
+    <li>Integrantes desplegados: {{ resultado.integrantesDesplegados }}</li>
+    <li>Integrantes restantes: {{ resultado.integrantesRestantes }}</li>
+  </ul>
+</div>
