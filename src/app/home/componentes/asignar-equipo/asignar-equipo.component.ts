@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
-import { AdministradorService } from '../../services/administrador.service';
-import { DesastreService, Desastre } from '../../services/desastre.service';
-import { EquipoService, Equipo } from '../../services/equipo.service';
+import { AdministradorService } from '../../pages/services/administrador.service';
+import { DesastreService, Desastre } from '../../pages/services/desastre.service';
+import { EquipoService, Equipo } from '../../pages/services/equipo.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 

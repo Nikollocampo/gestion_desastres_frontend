@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AdministradorService } from '../../services/administrador.service';
+import { AdministradorService } from '../../pages/services/administrador.service';
 import { CommonModule } from '@angular/common';
 
 @Component({

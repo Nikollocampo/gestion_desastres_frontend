@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RutaService, RutaResponseDto } from '../../services/ruta.service';
+import { RutaService, RutaResponseDto } from '../../pages/services/ruta.service';
 import { Subscription } from 'rxjs';
 
 @Component({

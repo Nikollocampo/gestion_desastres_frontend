@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DesastreService, Desastre } from '../../services/desastre.service';
+import { DesastreService, Desastre } from '../../pages/services/desastre.service';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({

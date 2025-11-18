@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { EquipoService, EquipoRequestDto, EquipoResponseDto } from '../../services/equipo.service';
+import { EquipoService, EquipoRequestDto, EquipoResponseDto } from '../../pages/services/equipo.service';
 import { NgForm, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { UbicacionService, UbicacionResponseDto } from '../../services/ubicacion.service';
+import { UbicacionService, UbicacionResponseDto } from '../../pages/services/ubicacion.service';
 
 @Component({
   selector: 'app-crear-equipo',
