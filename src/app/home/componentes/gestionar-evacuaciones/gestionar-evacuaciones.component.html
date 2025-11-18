@@ -1,0 +1,14 @@
+<div class="evacuaciones-lista">
+  <div *ngIf="evacuaciones.length > 0; else sinEvacuaciones">
+    <div class="titulo-evacuacion">{{ evacuaciones[0] }}</div>
+    <ul>
+      <li *ngFor="let ev of evacuaciones.slice(1)" class="evacuacion-item">
+        {{ ev }}
+      </li>
+    </ul>
+  </div>
+  <ng-template #sinEvacuaciones>
+    <span style="color: #c00;">No hay evacuaciones para mostrar.</span>
+  </ng-template>
+</div>
+

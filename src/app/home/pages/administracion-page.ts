@@ -9,9 +9,11 @@ import { DefinirRutaComponent } from '../componentes/definir-ruta/definir-ruta.c
 import { AsignarRecursosPrioridadComponent, AsignacionRecurso } from '../componentes/asignar-recursos-prioridad/asignar-recursos-prioridad.component';
 import { ListaDesastresPrioridadComponent } from '../componentes/lista-desastres-prioridad/lista-desastres-prioridad.component';
 import { MonitorearUbicacionesComponent } from '../componentes/monitorear-ubicaciones/monitorear-ubicaciones.component';
-import { OperadorService } from '../services/operador-service';
+import { OperadorService } from '../services/operador.service';
 import { ActualizarSituacionDesastreComponent, DesastreActualizar } from '../componentes/actualizar-situacion-desastre/actualizar-situacion-desastre.component';
 import { FormsModule } from '@angular/forms';
+import { OrdenarPorPrioridadPipe } from '../pipes/ordenar-por-prioridad.pipe';
+import { GestionarEvacuacionesComponent } from '../componentes/gestionar-evacuaciones/gestionar-evacuaciones.component';
 
 @Component({
   selector: 'app-administracion-page',
@@ -26,7 +28,9 @@ import { FormsModule } from '@angular/forms';
     AsignarRecursosPrioridadComponent,
     ListaDesastresPrioridadComponent,
     MonitorearUbicacionesComponent,
-    ActualizarSituacionDesastreComponent
+    ActualizarSituacionDesastreComponent,
+    OrdenarPorPrioridadPipe,
+    GestionarEvacuacionesComponent
   ],
   templateUrl: './administracion-page.html',
   styleUrls: ['./administracion-page.css']
@@ -36,6 +40,7 @@ export class AdministracionPage implements OnInit {
   desastres: Desastre[] = [];
   desastreSeleccionado: Desastre | null = null;
   ubicacionesMonitoreo: string[] = [];
+  evacuaciones: string[] = [];
 
   // Para mostrar la salida de asignación de recursos
   resultadoAsignacion: {mensaje: string|null, exito: boolean|null, asignaciones: AsignacionRecurso[]} | null = null;
@@ -54,6 +59,7 @@ export class AdministracionPage implements OnInit {
     if (this.rol === 'OPERADOR_EMERGENCIA') {
       this.cargarUbicacionesMonitoreo();
       this.cargarDesastresActualizar();
+      this.cargarEvacuaciones();
     }
   }
 
@@ -82,6 +88,13 @@ export class AdministracionPage implements OnInit {
         }));
       },
       error: () => this.desastresActualizar = []
+    });
+  }
+
+  cargarEvacuaciones() {
+    this.operadorService.gestionarEvacuaciones().subscribe({
+      next: (data) => this.evacuaciones = data,
+      error: () => this.evacuaciones = ['No hay evacuaciones para mostrar.']
     });
   }
 
