@@ -1,0 +1,22 @@
+.actualizar-form {
+  margin: 1em 0;
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #f9f9f9;
+  max-width: 400px;
+}
+.actualizar-form label {
+  display: block;
+  margin-top: 0.5em;
+}
+.actualizar-form select, .actualizar-form input {
+  width: 100%;
+  margin-top: 0.2em;
+  margin-bottom: 0.7em;
+  padding: 0.3em;
+}
+button {
+  margin-top: 0.5em;
+}
+

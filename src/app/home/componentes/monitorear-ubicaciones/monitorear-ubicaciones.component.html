@@ -1,0 +1,14 @@
+<div class="ubicaciones-lista">
+  <div *ngIf="ubicaciones.length > 0; else sinUbicaciones">
+    <div class="titulo-monitoreo">{{ ubicaciones[0] }}</div>
+    <ul>
+      <li *ngFor="let ubicacion of ubicaciones.slice(1)" class="ubicacion-item">
+        {{ ubicacion }}
+      </li>
+    </ul>
+  </div>
+  <ng-template #sinUbicaciones>
+    <span style="color: #c00;">No hay ubicaciones para monitorear.</span>
+  </ng-template>
+</div>
+

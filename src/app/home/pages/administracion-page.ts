@@ -8,18 +8,25 @@ import { CrearEquipoComponent } from '../componentes/crear-equipo/crear-equipo.c
 import { DefinirRutaComponent } from '../componentes/definir-ruta/definir-ruta.component';
 import { AsignarRecursosPrioridadComponent, AsignacionRecurso } from '../componentes/asignar-recursos-prioridad/asignar-recursos-prioridad.component';
 import { ListaDesastresPrioridadComponent } from '../componentes/lista-desastres-prioridad/lista-desastres-prioridad.component';
+import { MonitorearUbicacionesComponent } from '../componentes/monitorear-ubicaciones/monitorear-ubicaciones.component';
+import { OperadorService } from '../services/operador-service';
+import { ActualizarSituacionDesastreComponent, DesastreActualizar } from '../componentes/actualizar-situacion-desastre/actualizar-situacion-desastre.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-administracion-page',
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     BotonGenerarReporteComponent,
     AsignarEquipoComponent,
     CrearEquipoComponent,
     DefinirRutaComponent,
     AsignarRecursosPrioridadComponent,
-    ListaDesastresPrioridadComponent
+    ListaDesastresPrioridadComponent,
+    MonitorearUbicacionesComponent,
+    ActualizarSituacionDesastreComponent
   ],
   templateUrl: './administracion-page.html',
   styleUrls: ['./administracion-page.css']
@@ -28,15 +35,26 @@ export class AdministracionPage implements OnInit {
   rol: string | null = null;
   desastres: Desastre[] = [];
   desastreSeleccionado: Desastre | null = null;
+  ubicacionesMonitoreo: string[] = [];
 
   // Para mostrar la salida de asignación de recursos
   resultadoAsignacion: {mensaje: string|null, exito: boolean|null, asignaciones: AsignacionRecurso[]} | null = null;
+  desastresActualizar: DesastreActualizar[] = [];
+  mensajeActualizacion: string|null = null;
 
-  constructor(private authService: AuthService, private desastreService: DesastreService) {}
+  constructor(
+    private authService: AuthService,
+    private desastreService: DesastreService,
+    private operadorService: OperadorService
+  ) {}
 
   ngOnInit(): void {
     this.rol = this.authService.getRol();
     this.cargarDesastres();
+    if (this.rol === 'OPERADOR_EMERGENCIA') {
+      this.cargarUbicacionesMonitoreo();
+      this.cargarDesastresActualizar();
+    }
   }
 
   cargarDesastres() {
@@ -46,7 +64,35 @@ export class AdministracionPage implements OnInit {
     });
   }
 
+  cargarUbicacionesMonitoreo() {
+    this.operadorService.monitorearUbicaciones().subscribe({
+      next: (data) => this.ubicacionesMonitoreo = data,
+      error: () => this.ubicacionesMonitoreo = []
+    });
+  }
+
+  cargarDesastresActualizar() {
+    this.desastreService.obtenerTodos().subscribe({
+      next: (data) => {
+        this.desastresActualizar = (data || []).map((d: any) => ({
+          idDesastre: d.idDesastre,
+          nombre: d.nombre,
+          personasAfectadas: d.personasAfectadas,
+          magnitud: d.magnitud
+        }));
+      },
+      error: () => this.desastresActualizar = []
+    });
+  }
+
   onAsignacionRecursos(resultado: {mensaje: string|null, exito: boolean|null, asignaciones: AsignacionRecurso[]}) {
     this.resultadoAsignacion = resultado;
+  }
+
+  onActualizarSituacion(payload: { idDesastre: string, personasAfectadas: number, magnitud: number }) {
+    this.operadorService.actualizarSituacion(payload.idDesastre, payload.personasAfectadas, payload.magnitud).subscribe({
+      next: (resp) => this.mensajeActualizacion = resp.mensaje,
+      error: () => this.mensajeActualizacion = 'Error al actualizar la situación.'
+    });
   }
 }

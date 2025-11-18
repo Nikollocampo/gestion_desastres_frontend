@@ -1,0 +1,12 @@
+.ubicaciones-lista {
+  margin-top: 1em;
+  padding-left: 1.5em;
+}
+.ubicacion-item {
+  margin-bottom: 0.5em;
+}
+.titulo-monitoreo {
+  font-weight: bold;
+  margin-bottom: 0.7em;
+}
+

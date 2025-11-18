@@ -4,12 +4,6 @@
   <ng-container *ngIf="rol === 'ADMINISTRADOR'; else noAdmin">
     <section>
       <h2>Panel de Administrador</h2>
-      <p>Gestiona la configuración general del sistema y los recursos.</p>
-      <ul>
-        <li>Gestión de usuarios y roles</li>
-        <li>Configuración global del sistema</li>
-        <li>Administración de recursos disponibles</li>
-      </ul>
       <app-boton-generar-reporte></app-boton-generar-reporte>
       <h3>Añadir equipo</h3>
       <app-crear-equipo></app-crear-equipo>
@@ -52,12 +46,13 @@
     <ng-container *ngIf="rol === 'OPERADOR_EMERGENCIA'; else noRol">
       <section>
         <h2>Panel de Operador de Emergencia</h2>
-        <p>Accede rápidamente a tareas operativas del día a día.</p>
-        <ul>
-          <li>Reportar y actualizar incidentes</li>
-          <li>Actualizar estado de recursos</li>
-          <li>Consultar zonas afectadas</li>
-        </ul>
+        <h3>Monitorear ubicaciones</h3>
+        <app-monitorear-ubicaciones [ubicaciones]="ubicacionesMonitoreo"></app-monitorear-ubicaciones>
+        <h3>Actualizar situación de un desastre</h3>
+        <app-actualizar-situacion-desastre [desastres]="desastresActualizar" (actualizar)="onActualizarSituacion($event)"></app-actualizar-situacion-desastre>
+        <div *ngIf="mensajeActualizacion" style="margin-top: 1em; color: #0074d9;">
+          {{ mensajeActualizacion }}
+        </div>
       </section>
     </ng-container>
     <ng-template #noRol>
