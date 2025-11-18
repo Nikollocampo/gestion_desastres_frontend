@@ -2,14 +2,25 @@
   padding: 16px 24px;
 }
 .rutas-grid {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  align-items: start;
+  max-width: 1100px;
+  margin: 0 auto 16px auto;
 }
-.rutas-grid > * {
-  flex: 1 1 340px;
-  max-width: 440px;
+.col-left, .col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.grid-wide {
+  grid-column: 1 / -1;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .rutas-estadisticas-page { padding: 12px; }
+  .rutas-grid { gap: 12px; }
 }

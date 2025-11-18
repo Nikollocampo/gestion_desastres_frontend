@@ -1,6 +1,5 @@
-
-.crear-ruta-container {
-  padding: 0.9rem 0.9rem 0.8rem 0.9rem;
+.crear-ubicacion-container {
+  padding: 0.9rem;
   border-radius: 10px;
   max-width: 320px;
   margin: 10px auto;
@@ -9,7 +8,7 @@
   border: 1px solid #d6e1eb;
   font-family: 'Segoe UI', 'Arial', sans-serif;
 }
-.crear-ruta-container h2 {
+.crear-ubicacion-container h2 {
   margin-top: 0;
   color: #111;
   font-size: 1.05rem;
@@ -17,17 +16,18 @@
   margin-bottom: 0.6rem;
   letter-spacing: 0.01em;
 }
-.crear-ruta-container form > div {
+/* disposición consistente con Crear Ruta */
+.crear-ubicacion-container form > div { 
   margin-bottom: 0.55rem;
 }
-.crear-ruta-container label {
+.crear-ubicacion-container label {
   display: block;
   margin-bottom: 0.2rem;
   color: #222;
   font-weight: 500;
   font-size: 0.72rem;
 }
-.crear-ruta-container input, .crear-ruta-container select {
+.crear-ubicacion-container input, .crear-ubicacion-container select {
   width: 100%;
   padding: 0.35rem 0.5rem;
   box-sizing: border-box;
@@ -37,7 +37,7 @@
   background: #f7fafd;
   transition: border 0.2s;
 }
-.crear-ruta-container input:focus, .crear-ruta-container select:focus {
+.crear-ubicacion-container input:focus, .crear-ubicacion-container select:focus {
   border: 1px solid #42a5f5;
   outline: none;
   background: #eaf4ff;
@@ -64,12 +64,11 @@ button:hover:not(:disabled) {
 }
 .mensaje {
   color: #388e3c;
-  margin-top: 1rem;
+  margin-top: 0.7rem;
   font-weight: 500;
 }
 .error {
   color: #d32f2f;
-  margin-top: 1rem;
+  margin-top: 0.7rem;
   font-weight: 500;
 }
-

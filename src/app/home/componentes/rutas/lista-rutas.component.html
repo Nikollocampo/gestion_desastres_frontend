@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let ruta of rutas">
+      <tr *ngFor="let ruta of pagedRutas">
         <td>{{ ruta.origen.nombre }}</td>
         <td>{{ ruta.destino.nombre }}</td>
         <td>{{ ruta.distancia }}</td>
@@ -21,4 +21,10 @@
     </tbody>
   </table>
   <div *ngIf="!cargando && rutas.length === 0">No hay rutas registradas.</div>
+
+  <div *ngIf="!cargando && rutas.length > 0" class="pager-center">
+    <button (click)="prevPage()" [disabled]="page === 1">Anterior</button>
+    <span>Página {{ page }} de {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="page === totalPages">Siguiente</button>
+  </div>
 </div>
