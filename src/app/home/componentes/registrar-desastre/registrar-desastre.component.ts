@@ -13,6 +13,7 @@ import { UbicacionService, UbicacionResponseDto } from '../../pages/services/ubi
 })
 export class RegistrarDesastreComponent implements OnInit {
   // Form fields
+  idDesastre: string = '';
   idUbicacion: string = '';
   nombre: string = '';
   tipoDesastre: string = '';
@@ -57,6 +58,7 @@ export class RegistrarDesastreComponent implements OnInit {
     this.cargando = true;
 
     const dto: DesastreRequestDto = {
+      idDesastre: this.idDesastre || undefined,
       idUbicacion: this.idUbicacion,
       nombre: this.nombre || undefined,
       tipoDesastre: this.tipoDesastre || undefined,
