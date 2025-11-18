@@ -163,8 +163,13 @@ export class CrearRecursoComponent implements OnInit {
     const selected = fv.ubicacionSeleccionada;
     let ubicacionPayload: any = null;
     if (selected && selected !== 'new') {
-      // Solo enviar el id de la ubicación existente
-      ubicacionPayload = { id: selected };
+      // Buscar la ubicación completa y enviarla
+      const found = this.ubicaciones.find(u => u.id === selected);
+      if (found) {
+        ubicacionPayload = found;
+      } else {
+        ubicacionPayload = { id: selected };
+      }
     } else {
       // Nueva ubicación: enviar los campos completos
       ubicacionPayload = fv.ubicacion;

@@ -1,28 +1,302 @@
-/* Estilos para CrearRecursoComponent - vacío por ahora */
-.crear-recurso {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 1rem;
+/* Tarjeta del formulario crear recurso (idéntico a crear equipo) */
+.crear-equipo-card {
+  padding: 0.9rem;
+  border-radius: 10px;
+  max-width: 360px;
+  margin: 10px 0;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(66,165,245,0.08);
+  border: 1px solid #d6e1eb;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
 }
-
-.crear-recurso label {
+.crear-equipo-card .form-title {
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+  color: #111;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.crear-equipo-card .form-row { 
+  margin-bottom: 0.55rem;
+}
+.crear-equipo-card label {
   display: block;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.2rem;
+  color: #222;
+  font-weight: 500;
+  font-size: 0.72rem;
 }
-
-.crear-recurso input,
-.crear-recurso select {
+.crear-equipo-card input,
+.crear-equipo-card select {
   width: 100%;
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
+  padding: 0.35rem 0.5rem;
   box-sizing: border-box;
+  border: 1px solid #b6c6e3;
+  border-radius: 4px;
+  font-size: 0.74rem;
+  background: #f7fafd;
+  transition: border 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.crear-equipo-card input:focus,
+.crear-equipo-card select:focus {
+  border: 1px solid #42a5f5;
+  outline: none;
+  background: #eaf4ff;
+  box-shadow: 0 0 0 3px rgba(66, 165, 245, 0.15);
+}
+.crear-equipo-card .actions { 
+  margin-top: 0.35rem;
+}
+.crear-equipo-card button.primary {
+  padding: 0.35rem 0.8rem;
+  background: #42a5f5;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.02s;
+}
+.crear-equipo-card button.primary:disabled {
+  background: #e0e0e0;
+  color: #aaa;
+  cursor: not-allowed;
+}
+.crear-equipo-card button.primary:hover:not(:disabled) {
+  background: #2366b8;
+}
+.crear-equipo-card button.primary:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.estado { margin-top: 0.6rem; font-size: 0.85rem; }
+.exito { color: #1976d2; font-weight: 600; }
+.error { color: #d32f2f; font-weight: 600; }
+:root {
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --primary: #2563eb;        /* azul principal */
+  --primary-700: #1d4ed8;
+  --ring: rgba(37, 99, 235, 0.35);
+  --error: #dc2626;
+  --success: #16a34a;
+  --border: #dbeafe;        /* azul muy claro */
+  --border-strong: #93c5fd; /* azul claro para resaltes */
 }
 
-.crear-recurso .success {
-  color: green;
+.crear-recurso {
+  max-width: 840px;
+  margin: 24px auto;
+  padding: 0 12px;
 }
 
-.crear-recurso .error {
-  color: red;
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  /* sombra con tinte azul similar a tarjetas azules */
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.08), 0 1px 2px rgba(0,0,0,0.04);
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 20px 24px 12px 24px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(59,130,246,0.08), rgba(59,130,246,0.05));
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.card-header h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.header-left { display: flex; flex-direction: column; gap: 6px; }
+.header-actions { display: flex; align-items: center; }
+
+@media (max-width: 520px) {
+  .card-header { flex-direction: column; align-items: stretch; }
+  .header-actions { justify-content: flex-end; }
+}
+
+.subtitle {
+  margin: 6px 0 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.form { padding: 20px 24px 24px 24px; }
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px 20px;
+}
+
+.form-field { grid-column: span 6; }
+.form-field.full { grid-column: 1 / -1; }
+
+@media (max-width: 720px) {
+  .form-field { grid-column: 1 / -1; }
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+input, select {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  background: #fff;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  height: 44px;
+  line-height: 1.4;
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .02s ease;
+}
+
+input:focus, select:focus {
+  border-color: var(--border-strong);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+/* Estado inválido (Angular agrega clases ng-invalid/ng-touched) */
+input.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
+  border-color: var(--error);
+  background: #fef2f2;
+  box-shadow: 0 0 0 2px rgba(220,38,38,0.10);
+  transition: border-color .2s, background .2s, box-shadow .2s;
+}
+.form-field .error-msg {
+  margin-top: 2px;
+  font-size: 0.92em;
+  font-weight: 500;
+  color: var(--error);
+  background: #fef2f2;
+  border-radius: 6px;
+  padding: 2px 8px;
+  display: inline-block;
+  box-shadow: 0 1px 2px rgba(220,38,38,0.04);
+}
+.form-field select.ng-invalid.ng-touched {
+  background-image: linear-gradient(45deg, transparent 50%, var(--error) 50%),
+                    linear-gradient(135deg, var(--error) 50%, transparent 50%);
+  background-position: calc(100% - 18px) calc(1em + 2px), calc(100% - 13px) calc(1em + 2px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+
+.hint { color: var(--muted); font-size: 0.85rem; margin-top: 4px; }
+.error-msg { color: var(--error); font-size: 0.85rem; margin-top: 4px; }
+
+.row { display: flex; align-items: center; }
+.gap { gap: 10px; flex-wrap: wrap; }
+.row select { flex: 1 1 260px; }
+
+.fieldset {
+  margin: 18px 0 0 0;
+  padding: 14px 16px 4px 16px;
+  border: 1px dashed var(--border-strong);
+  border-radius: 10px;
+  background: #f0f7ff;
+}
+
+.fieldset legend {
+  padding: 0 8px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 10px 14px;
+  height: 44px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease, border-color .2s ease, transform .02s ease;
+}
+
+.btn:active { transform: translateY(1px); }
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+.btn-primary:hover { background: var(--primary-700); }
+.btn-primary:disabled { opacity: .6; cursor: not-allowed; }
+
+.btn-outline {
+  background: #fff;
+  color: var(--primary);
+  border-color: var(--border-strong);
+}
+.btn-outline:hover {
+  background: #eff6ff;
+  border-color: var(--primary);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+.btn-ghost:hover {
+  background: #f3f4f6;
+}
+
+.alert {
+  margin-top: 16px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid;
+}
+.alert.success {
+  color: var(--success);
+  border-color: rgba(22,163,74,.35);
+  background: rgba(22,163,74,.06);
+}
+.alert.error {
+  color: var(--error);
+  border-color: rgba(220,38,38,.35);
+  background: rgba(220,38,38,.06);
+}
+
+/* Línea divisoria sutil entre grupos para aspecto de "tabla azul" */
+.form-grid + .fieldset { border-color: var(--border); background: #f1f5f9; }
+
+/* Select con flecha más visible (similar a estilo azul) */
+select {
+  background-image: linear-gradient(45deg, transparent 50%, var(--primary) 50%),
+                    linear-gradient(135deg, var(--primary) 50%, transparent 50%);
+  background-position: calc(100% - 18px) calc(1em + 2px), calc(100% - 13px) calc(1em + 2px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 34px;
 }
 

@@ -8,8 +8,6 @@
         <div class="col">
           <app-crear-recurso></app-crear-recurso>
           <app-crear-equipo></app-crear-equipo>
-          <h3>Definir ruta</h3>
-          <app-definir-ruta></app-definir-ruta>
         </div>
         <div class="col">
           <app-asignar-equipo></app-asignar-equipo>
@@ -66,6 +64,7 @@
               <span class="aviso">No se asignaron recursos a ningún desastre.</span>
             </ng-template>
           </div>
+          <app-definir-ruta></app-definir-ruta>
         </div>
       </div>
       <app-lista-desastres-prioridad [desastres]="desastres | ordenarPorPrioridad"></app-lista-desastres-prioridad>

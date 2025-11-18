@@ -1,0 +1,36 @@
+<form class="crear-equipo-card" #recursoForm="ngForm" (ngSubmit)="crearRecurso(recursoForm)" autocomplete="off">
+  <h2 class="form-title">Crear Recurso</h2>
+
+  <div class="form-row">
+    <label for="nombre">Nombre:</label>
+    <input id="nombre" [(ngModel)]="recurso.nombre" name="nombre" required placeholder="Ej: Agua Potable" />
+  </div>
+
+  <div class="form-row">
+    <label for="tipo">Tipo:</label>
+    <select id="tipo" [(ngModel)]="recurso.tipo" name="tipo" required>
+      <option value="" disabled selected>-- Seleccione --</option>
+      <option value="ALIMENTO">Alimento</option>
+      <option value="MEDICAMENTO">Medicamento</option>
+    </select>
+  </div>
+
+  <div class="form-row">
+    <label for="cantidad">Cantidad:</label>
+    <input id="cantidad" type="number" inputmode="numeric" [(ngModel)]="recurso.cantidad" name="cantidad" required min="0" placeholder="0" />
+  </div>
+
+  <div class="form-row">
+    <label for="ubicacion">Ubicación:</label>
+    <select id="ubicacion" [(ngModel)]="recurso.ubicacionId" name="ubicacionId" required>
+      <option value="" disabled selected>Seleccione una ubicación</option>
+      <option *ngFor="let u of ubicaciones" [value]="u.id">{{ u.nombre }}</option>
+    </select>
+  </div>
+
+  <div class="actions">
+    <button class="primary" type="submit" [disabled]="loading">{{ loading ? 'Creando…' : 'Crear Recurso' }}</button>
+  </div>
+
+  <div *ngIf="mensaje" [ngClass]="{'exito': exito, 'error': exito === false}" class="estado">{{ mensaje }}</div>
+</form>

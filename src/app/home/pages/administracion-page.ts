@@ -51,7 +51,7 @@ export class AdministracionPage implements OnInit {
   mensajeActualizacion: string|null = null;
   // Paginación para resultado de asignaciones
   page = 1;
-  pageSize = 4;
+  pageSize = 5;
 
   constructor(
     private authService: AuthService,
