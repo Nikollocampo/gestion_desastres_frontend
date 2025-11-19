@@ -50,6 +50,11 @@ export class ReportesEstadisticasPage implements OnInit {
   // Pastel por zona (sin dependencias externas)
   pieGradient = '';
   pieLegend: { label: string; value: number; color: string; percent: number }[] = [];
+  
+  // Pastel por recursos
+  pieGradientRecursos = '';
+  pieLegendRecursos: { label: string; value: number; color: string; percent: number }[] = [];
+  
   private piePalette: string[] = [
     '#5C6BC0', '#42A5F5', '#26A69A', '#9CCC65', '#FFCA28', '#EF5350',
     '#AB47BC', '#8D6E63', '#29B6F6', '#66BB6A', '#FF7043', '#7E57C2', '#26C6DA'
@@ -68,13 +73,13 @@ export class ReportesEstadisticasPage implements OnInit {
   private cargarEstadisticas() {
     this.cargando = true;
     
-    // Cargar recursos distribuidos desde desastres con prioridad
-    this.adminService.listarDesastresPorPrioridad().subscribe({
-      next: (desastres) => {
-        console.log('Desastres recibidos:', desastres);
-        this.procesarRecursosDistribuidos(desastres);
+    // Cargar recursos creados
+    this.recursosService.listarRecursos().subscribe({
+      next: (recursos) => {
+        console.log('Recursos creados:', recursos);
+        this.procesarRecursosCreados(recursos);
       },
-      error: (err) => console.error('Error al cargar desastres:', err)
+      error: (err) => console.error('Error al cargar recursos:', err)
     });
 
     // Cargar evacuaciones
@@ -90,59 +95,34 @@ export class ReportesEstadisticasPage implements OnInit {
     });
   }
 
-  private procesarRecursosDistribuidos(desastres: any[]) {
-    const porProducto: { [key: string]: { total: number; distribuido: number; porTipo: { tipo: string; cantidad: number; desastre: string }[] } } = {};
-    let totalDistribuido = 0;
-    const porZona: { [key: string]: number } = {};
+  private procesarRecursosCreados(recursos: any[]) {
+    const porUbicacion: { [key: string]: number } = {};
+    let total = 0;
 
-    // Procesar desastres que tienen recursos asignados
-    for (const desastre of desastres || []) {
-      const nombreDesastre = desastre.zona || desastre.nombre || desastre.tipo || 'Sin nombre';
-      const recursos = desastre.recursos || [];
-      
-      for (const recurso of recursos) {
-        const nombre = recurso.tipo || recurso.nombre || 'Recurso';
-        const cantidad = Number(recurso.cantidad || 0);
+    // Agrupar recursos por ubicación
+    for (const recurso of recursos || []) {
+      const ubicacion = recurso.ubicacion?.nombre || 'Sin ubicación';
+      const cantidad = Number(recurso.cantidad || 0);
 
-        if (!porProducto[nombre]) {
-          porProducto[nombre] = { total: 0, distribuido: 0, porTipo: [] };
-        }
-
-        porProducto[nombre].total += cantidad;
-        porProducto[nombre].distribuido += cantidad;
-        porProducto[nombre].porTipo.push({
-          tipo: nombreDesastre,
-          cantidad: cantidad,
-          desastre: nombreDesastre
-        });
-
-        totalDistribuido += cantidad;
-        
-        // Agrupar por zona/desastre
-        porZona[nombreDesastre] = (porZona[nombreDesastre] || 0) + cantidad;
-      }
+      porUbicacion[ubicacion] = (porUbicacion[ubicacion] || 0) + cantidad;
+      total += cantidad;
     }
 
-    this.totalRecursosDistribuidos = totalDistribuido;
-    this.totalRecursosDisponibles = totalDistribuido; // En este contexto, solo mostramos lo distribuido
-    this.porcentajeDistribucionGlobal = 100; // Todo lo listado está distribuido
+    this.totalRecursosDistribuidos = total;
+    this.totalRecursosDisponibles = total;
+    this.porcentajeDistribucionGlobal = 100;
 
-    this.recursosDistribuidos = Object.keys(porProducto).map(nombre => ({
-      producto: nombre,
-      cantidadTotal: porProducto[nombre].total,
-      distribuidoPorTipo: porProducto[nombre].porTipo,
-      porcentajeDistribuido: 100 // Los recursos asignados están 100% distribuidos
+    this.recursosDistribuidos = Object.keys(porUbicacion).map(ubicacion => ({
+      producto: ubicacion,
+      cantidadTotal: porUbicacion[ubicacion],
+      distribuidoPorTipo: [],
+      porcentajeDistribuido: 100
     })).sort((a, b) => b.cantidadTotal - a.cantidadTotal);
 
-    // Agrupar por zona para gráfico
-    this.distribuidosPorUbicacion = Object.keys(porZona).map(nombre => {
-      const cantidad = porZona[nombre];
-      return {
-        nombre,
-        cantidad,
-        porcentaje: totalDistribuido > 0 ? Math.round((cantidad / totalDistribuido) * 100) : 0
-      };
-    }).sort((a, b) => b.cantidad - a.cantidad);
+    this.distribuidosPorUbicacion = [];
+    
+    // Actualizar gráfico de pastel de recursos
+    this.actualizarPieRecursos();
   }
 
   private procesarEvacuaciones(evacuaciones: string[]) {
@@ -305,5 +285,33 @@ export class ReportesEstadisticasPage implements OnInit {
       start = end;
     }
     this.pieGradient = `conic-gradient(${segments.join(', ')})`;
+  }
+
+  private actualizarPieRecursos() {
+    const total = this.recursosDistribuidos.reduce((acc, r) => acc + (r.cantidadTotal || 0), 0);
+    if (total <= 0) {
+      this.pieGradientRecursos = '';
+      this.pieLegendRecursos = [];
+      return;
+    }
+
+    const items = this.recursosDistribuidos.map((rec, idx) => {
+      const value = rec.cantidadTotal;
+      const percent = Math.round((value / total) * 100);
+      const color = this.piePalette[idx % this.piePalette.length];
+      return { label: rec.producto, value, percent, color };
+    }).sort((a, b) => b.value - a.value);
+
+    this.pieLegendRecursos = items;
+
+    // Construir conic-gradient
+    let start = 0;
+    const segments: string[] = [];
+    for (const it of items) {
+      const end = start + (it.value / total) * 100;
+      segments.push(`${it.color} ${start}% ${end}%`);
+      start = end;
+    }
+    this.pieGradientRecursos = `conic-gradient(${segments.join(', ')})`;
   }
 }
