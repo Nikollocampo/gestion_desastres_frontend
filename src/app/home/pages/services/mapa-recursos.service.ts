@@ -18,7 +18,7 @@ export interface InventarioUbicacionResponseDto {
   providedIn: 'root',
 })
 export class MapaRecursosService {
-  private apiUrl = '/api/inventario-completo';
+  private apiUrl = 'http://localhost:8080/api/mapa-recursos/inventario-completo';
 
   constructor(private http: HttpClient) {}
 

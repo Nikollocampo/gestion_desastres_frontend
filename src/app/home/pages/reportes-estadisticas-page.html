@@ -1,0 +1,51 @@
+            
+
+<div class="reportes-estadisticas-page">
+  <div class="header">
+    <h1>Reportes y Estadísticas</h1>
+    <button (click)="refrescar()" class="btn-refrescar">Actualizar datos</button>
+  </div>
+
+  <p *ngIf="cargando" class="loading">Cargando estadísticas...</p>
+
+  <div *ngIf="!cargando" class="content">
+    
+    
+
+    <!-- Sección: Evacuaciones -->
+    <section class="seccion-reporte">
+      <h2>🚨 Avance de Evacuaciones</h2>
+
+      
+
+      <!-- Tabla detallada de evacuaciones -->
+      <div class="tabla-container">
+        <h3>Detalle por zona</h3>
+        <table class="tabla-evacuaciones" *ngIf="evacuaciones.length > 0">
+          <thead>
+            <tr>
+              <th>Zona</th>
+              <th>Personas</th>
+              <th>Prioridad</th>
+              <!-- Estado y Avance eliminados -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let evac of evacuaciones">
+              <td><strong>{{ evac.zona }}</strong></td>
+              <td>{{ evac.totalPersonas }}</td>
+              <td>
+                <span class="chip" [style.background]="getPrioridadColor(evac.prioridad)">
+                  {{ evac.prioridad }}
+                </span>
+              </td>
+              <!-- Estado y Avance eliminados -->
+            </tr>
+          </tbody>
+        </table>
+        <p *ngIf="evacuaciones.length === 0" class="sin-datos">No hay evacuaciones registradas</p>
+      </div>
+    </section>
+
+  </div>
+</div>
