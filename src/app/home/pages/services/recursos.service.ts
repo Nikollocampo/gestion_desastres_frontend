@@ -1,3 +1,4 @@
+// src/app/home/pages/services/recursos.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -33,4 +34,9 @@ export class RecursosService {
   crearRecurso(recurso: RecursoDisponible): Observable<RecursoDisponible> {
     return this.http.post<RecursoDisponible>(`${this.apiUrl}/crear`, recurso);
   }
+
+  actualizarRecurso(id: string, recurso: RecursoDisponible): Observable<RecursoDisponible> {
+    return this.http.put<RecursoDisponible>(`${this.apiUrl}/actualizar/${id}`, recurso);
+  }
 }
+

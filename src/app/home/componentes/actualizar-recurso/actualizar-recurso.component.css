@@ -1,0 +1,118 @@
+/* Estilos compactos para el formulario de actualización de recursos */
+.crear-equipo-card {
+  padding: 16px;
+  border-radius: 8px;
+  max-width: 350px;
+  margin: 8px 0;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  border: 1px solid #e1e5e9;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+}
+
+.crear-equipo-card .form-title {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #333;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.crear-equipo-card .form-row {
+  margin-bottom: 12px;
+}
+
+.crear-equipo-card label {
+  display: block;
+  margin-bottom: 4px;
+  color: #333;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.crear-equipo-card input,
+.crear-equipo-card select {
+  width: 100%;
+  padding: 8px 10px;
+  box-sizing: border-box;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 13px;
+  background: #ffffff;
+  transition: border 0.2s;
+}
+
+.crear-equipo-card input:focus,
+.crear-equipo-card select:focus {
+  border: 1px solid #3b82f6;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.crear-equipo-card .actions {
+  margin-top: 16px;
+  text-align: right;
+}
+
+.crear-equipo-card button.primary {
+  padding: 8px 16px;
+  background: #3b82f6;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.crear-equipo-card button.primary:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.crear-equipo-card button.primary:hover:not(:disabled) {
+  background: #2563eb;
+}
+
+.crear-equipo-card button.btn-outline {
+  padding: 6px 12px;
+  background: #ffffff;
+  color: #3b82f6;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.crear-equipo-card button.btn-outline:hover {
+  background: #f3f4f6;
+}
+
+.hint {
+  color: #6b7280;
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.error-msg {
+  color: #dc2626;
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.estado {
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+.exito {
+  color: #059669;
+  font-weight: 500;
+}
+
+.error {
+  color: #dc2626;
+  font-weight: 500;
+}

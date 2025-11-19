@@ -20,15 +20,43 @@ export class BotonGenerarReporteComponent {
     this.mensaje = null;
     this.adminService.generarReporte().subscribe({
       next: (blob) => {
+        // Intentar leer el mensaje del backend si viene como texto
+        if (blob.type === 'application/json') {
+          // Si el backend retorna un JSON con mensaje, leerlo
+          const reader = new FileReader();
+          reader.onload = () => {
+            try {
+              const res = JSON.parse(reader.result as string);
+              this.mensaje = res.mensaje || 'Reporte generado';
+              // Mostrar mensaje emergente si el backend lo envía
+              if (res.mensaje && res.mensaje.includes('Descargas') || res.mensaje.includes('Downloads')) {
+                alert(res.mensaje);
+              }
+            } catch {
+              this.mensaje = 'Reporte generado';
+            }
+            this.loading = false;
+          };
+          reader.readAsText(blob);
+          return;
+        }
+        // Si es un archivo, descargarlo y mostrar mensaje estándar
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
         a.download = 'reporte_desastres.txt';
         a.click();
         window.URL.revokeObjectURL(url);
-        this.mensaje = 'Reporte generado y descargado correctamente';
+        this.mensaje = 'Reporte generado en carpeta Descargas';
         this.loading = false;
-        alert('El reporte se generó y descargó correctamente.\nRuta de descarga: C:/Users/[TU_USUARIO]/Downloads/reporte_desastres.txt');
+        // Intentar obtener el usuario de Windows desde el backend o dejar la ruta genérica
+        let usuario = '';
+        try {
+          // @ts-ignore
+          usuario = window?.navigator?.userAgentData?.platform || '';
+        } catch {}
+        // Como no se puede obtener el usuario real desde el frontend por seguridad, se deja la ruta genérica
+        alert('El reporte se descargó correctamente en la carpeta Descargas.\nRuta: C:/Users/tu_usuario/Downloads/reporte_desastres.txt');
       },
       error: (err) => {
         this.mensaje = 'Error al generar el reporte';

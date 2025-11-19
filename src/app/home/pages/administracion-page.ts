@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrdenarPorPrioridadPipe } from '../pipes/ordenar-por-prioridad.pipe';
 import { GestionarEvacuacionesComponent } from '../componentes/gestionar-evacuaciones/gestionar-evacuaciones.component';
 import { CrearRecursoComponent } from '../componentes/crear-recurso/crear-recurso.component';
+import { ActualizarRecursoComponent } from '../componentes/actualizar-recurso/actualizar-recurso.component';
 
 @Component({
   selector: 'app-administracion-page',
@@ -33,7 +34,8 @@ import { CrearRecursoComponent } from '../componentes/crear-recurso/crear-recurs
     ActualizarSituacionDesastreComponent,
     OrdenarPorPrioridadPipe,
     GestionarEvacuacionesComponent,
-    CrearRecursoComponent
+    CrearRecursoComponent,
+    ActualizarRecursoComponent
   ],
   templateUrl: './administracion-page.html',
   styleUrls: ['./administracion-page.css']
