@@ -19,7 +19,6 @@
           <app-crear-recurso></app-crear-recurso>
           <!-- Componente para actualizar recursos (visible solo en ADMINISTRADOR porque la plantilla completa se renderiza solo en ese rol) -->
           <app-actualizar-recurso></app-actualizar-recurso>
-          <app-crear-equipo></app-crear-equipo>
         </div>
         <div class="col">
           <app-asignar-equipo></app-asignar-equipo>
@@ -77,6 +76,7 @@
             </ng-template>
           </div>
           <app-definir-ruta></app-definir-ruta>
+          <app-crear-equipo></app-crear-equipo>
         </div>
       </div>
       <app-lista-desastres-prioridad [desastres]="desastres | ordenarPorPrioridad"></app-lista-desastres-prioridad>

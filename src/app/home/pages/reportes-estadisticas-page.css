@@ -1,0 +1,397 @@
+.reportes-estadisticas-page {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 28px;
+  color: #333;
+}
+
+.btn-refrescar {
+  padding: 10px 20px;
+  background: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.btn-refrescar:hover {
+  background: #1976d2;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  color: #666;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* Secciones de reporte */
+.seccion-reporte {
+  background: white;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.seccion-reporte h2 {
+  margin: 0 0 20px 0;
+  font-size: 24px;
+  color: #333;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+.seccion-reporte h3 {
+  margin: 20px 0 15px 0;
+  font-size: 18px;
+  color: #555;
+}
+
+/* Cards de resumen */
+.resumen-cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.card-stat {
+  flex: 1;
+  min-width: 150px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.stat-valor {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* Gráficos de barras */
+.grafico-container {
+  margin: 20px 0;
+}
+
+.bar-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.bar-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.bar-label {
+  min-width: 150px;
+  font-weight: 500;
+  color: #333;
+  text-align: right;
+}
+
+.bar-wrapper {
+  flex: 1;
+  background: #f5f5f5;
+  border-radius: 5px;
+  height: 30px;
+  overflow: hidden;
+  position: relative;
+}
+
+.bar {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 5px;
+  transition: width 0.5s ease;
+  min-width: 100px;
+}
+
+.bar-value {
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Tablas */
+.tabla-container {
+  margin-top: 20px;
+}
+
+.tabla-recursos,
+.tabla-evacuaciones {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.tabla-recursos th,
+.tabla-evacuaciones th {
+  background: linear-gradient(135deg, #eef2ff 0%, #e3f2fd 100%);
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #3949ab;
+  border-bottom: 2px solid #dce1ff;
+}
+
+.tabla-recursos td,
+.tabla-evacuaciones td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.tabla-recursos tbody tr:hover,
+.tabla-evacuaciones tbody tr:hover {
+  background: #f9f9f9;
+}
+
+/* Zebra rows for better readability */
+.tabla-evacuaciones tbody tr:nth-child(odd) {
+  background: #fafbff;
+}
+
+/* Accented first column to match tones */
+.tabla-evacuaciones td:first-child {
+  color: #3f51b5;
+  font-weight: 600;
+}
+
+/* Badges tuned to the page tones */
+.tabla-evacuaciones .badge {
+  box-shadow: 0 1px 2px rgba(63,81,181,0.15);
+  border: 1px solid rgba(63,81,181,0.15);
+}
+
+/* Chips consistent look */
+.tabla-evacuaciones .chip {
+  background: #e8f0fe;
+  color: #3f51b5;
+}
+
+/* Badges y chips */
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: white;
+}
+
+.chip {
+  display: inline-block;
+  padding: 4px 10px;
+  background: #e3f2fd;
+  color: #1976d2;
+  border-radius: 12px;
+  font-size: 12px;
+  margin-right: 6px;
+  margin-bottom: 4px;
+}
+
+/* Progress bar */
+.progress-bar {
+  width: 100%;
+  height: 25px;
+  background: #f5f5f5;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  transition: width 0.5s ease;
+  background: var(--color, #5c6bc0);
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.05);
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Sin datos */
+.sin-datos {
+  text-align: center;
+  padding: 30px;
+  color: #999;
+  font-style: italic;
+}
+
+.sin-datos-inline {
+  color: #999;
+  font-style: italic;
+  font-size: 13px;
+}
+
+/* Pie chart (conic-gradient) */
+.pie-section h3 {
+  margin-bottom: 12px;
+}
+
+.pie-layout {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.pie-wrapper {
+  position: relative;
+  width: 260px;
+  height: 260px;
+}
+
+.pie {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(#e0e0e0 0 100%);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12) inset, 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.pie-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 55%;
+  height: 55%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pie-total {
+  font-size: 26px;
+  font-weight: 700;
+  color: #3f51b5;
+  line-height: 1;
+}
+
+.pie-label {
+  font-size: 12px;
+  color: #607d8b;
+}
+
+.pie-legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  min-width: 280px;
+}
+
+.pie-legend li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px dashed #eee;
+}
+
+.pie-legend li:last-child {
+  border-bottom: none;
+}
+
+.swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.1) inset;
+}
+
+.legend-label {
+  color: #37474f;
+  font-weight: 500;
+}
+
+.legend-spacer {
+  flex: 1;
+}
+
+.legend-value {
+  font-weight: 600;
+  color: #424242;
+}
+
+.legend-percent {
+  color: #78909c;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .resumen-cards {
+    flex-direction: column;
+  }
+  
+  .card-stat {
+    min-width: 100%;
+  }
+  
+  .bar-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .bar-label {
+    text-align: left;
+    min-width: auto;
+  }
+  
+  .tabla-recursos,
+  .tabla-evacuaciones {
+    font-size: 13px;
+  }
+  
+  .tabla-recursos th,
+  .tabla-evacuaciones th,
+  .tabla-recursos td,
+  .tabla-evacuaciones td {
+    padding: 8px;
+  }
+}

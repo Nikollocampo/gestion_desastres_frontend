@@ -1,0 +1,86 @@
+            
+
+<div class="reportes-estadisticas-page">
+  <div class="header">
+    <h1>Reportes y Estadísticas</h1>
+  </div>
+
+  <p *ngIf="cargando" class="loading">Cargando estadísticas...</p>
+
+  <div *ngIf="!cargando" class="content">
+    
+    <!-- Sección: Recursos Distribuidos -->
+    <section class="seccion-reporte">
+      <h2>Recursos Creados</h2>
+
+      <div class="pie-section">
+        <h3>Recursos por ubicación</h3>
+
+        <div *ngIf="recursosDistribuidos.length > 0 && totalRecursosDistribuidos > 0; else sinDatosRecursos">
+          <div class="pie-layout">
+            <div class="pie-wrapper">
+              <div class="pie" [style.background]="pieGradientRecursos"></div>
+              <div class="pie-center">
+                <div class="pie-total">{{ totalRecursosDistribuidos }}</div>
+                <div class="pie-label">Recursos</div>
+              </div>
+            </div>
+
+            <ul class="pie-legend">
+              <li *ngFor="let item of pieLegendRecursos">
+                <span class="swatch" [style.background]="item.color"></span>
+                <span class="legend-label">{{ item.label }}</span>
+                <span class="legend-spacer"></span>
+                <span class="legend-value">{{ item.value }}</span>
+                <span class="legend-percent">({{ item.percent }}%)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <ng-template #sinDatosRecursos>
+          <p class="sin-datos">No hay recursos distribuidos</p>
+        </ng-template>
+      </div>
+    </section>
+
+    <!-- Sección: Evacuaciones -->
+    <section class="seccion-reporte">
+      <h2>Avance de Evacuaciones</h2>
+
+      
+
+      <!-- Gráfico de pastel: Personas evacuadas por zona -->
+      <div class="pie-section">
+        <h3>Personas evacuadas por zona</h3>
+
+        <div *ngIf="evacuaciones.length > 0 && totalPersonasEvacuadas > 0; else sinDatosEvac">
+          <div class="pie-layout">
+            <div class="pie-wrapper">
+              <div class="pie" [style.background]="pieGradient"></div>
+              <div class="pie-center">
+                <div class="pie-total">{{ totalPersonasEvacuadas }}</div>
+                <div class="pie-label">Personas</div>
+              </div>
+            </div>
+
+            <ul class="pie-legend">
+              <li *ngFor="let item of pieLegend">
+                <span class="swatch" [style.background]="item.color"></span>
+                <span class="legend-label">{{ item.label }}</span>
+                <span class="legend-spacer"></span>
+                <span class="legend-value">{{ item.value }}</span>
+                <span class="legend-percent">({{ item.percent }}%)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <ng-template #sinDatosEvac>
+          <p class="sin-datos">No hay evacuaciones registradas</p>
+        </ng-template>
+      </div>
+    </section>
+
+  </div>
+</div>
