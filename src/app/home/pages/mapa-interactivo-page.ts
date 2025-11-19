@@ -48,10 +48,10 @@ export class MapaInteractivoPage implements AfterViewInit, OnDestroy {
     // Esperar a que el mapa esté completamente inicializado antes de dibujar
     setTimeout(() => {
       this.dibujarUbicacionesFijas();
-      console.log('Ubicaciones fijas dibujadas, probando conexión con OSRM...');
-      // Probar OSRM primero con una ruta de prueba
+      console.log('Ubicaciones fijas dibujadas, generando rutas entre ubicaciones...');
+      // Generar todas las rutas automáticamente
       setTimeout(() => {
-        this.probarRutaOSRM();
+        this.generarRutasEntreUbicaciones();
       }, 1000);
     }, 500);
 
