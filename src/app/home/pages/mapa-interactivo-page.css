@@ -1,8 +1,122 @@
 .mapa-interactivo-page {
   padding: 32px;
 }
+
 .mapa-interactivo-page h1 {
   color: #1976d2;
   font-size: 2rem;
   margin-bottom: 16px;
+}
+
+.mapa-interactivo-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.panel-controles {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  font-size: 0.95rem;
+}
+
+.panel-controles h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+.panel-controles label {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.panel-controles select {
+  width: 100%;
+  padding: 6px 8px;
+  margin-top: 4px;
+}
+
+.panel-controles button {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 8px 16px;
+  background-color: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.panel-controles button:disabled {
+  background-color: #b0bec5;
+  cursor: not-allowed;
+}
+
+.mapa-wrapper {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  height: 600px;
+}
+
+#mapa-interactivo {
+  width: 100%;
+  height: 600px;
+}
+
+.leyenda {
+  margin-top: 16px;
+}
+
+.leyenda h3 {
+  margin: 0 0 8px;
+}
+
+.leyenda ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.leyenda li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.color-badge {
+  display: inline-block;
+  width: 16px;
+  height: 10px;
+  border-radius: 4px;
+  margin-right: 6px;
+}
+
+.color-badge.alto {
+  background-color: red;
+}
+
+.color-badge.medio {
+  background-color: orange;
+}
+
+.color-badge.bajo {
+  background-color: green;
+}
+
+@media (max-width: 900px) {
+  .mapa-interactivo-layout {
+    grid-template-columns: 1fr;
+  }
+  .mapa-wrapper {
+    height: 500px;
+  }
+  #mapa-interactivo {
+    height: 500px;
+  }
 }
