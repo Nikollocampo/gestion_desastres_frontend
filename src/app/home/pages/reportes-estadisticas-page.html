@@ -14,36 +14,39 @@
 
     <!-- Sección: Evacuaciones -->
     <section class="seccion-reporte">
-      <h2>🚨 Avance de Evacuaciones</h2>
+      <h2>Avance de Evacuaciones</h2>
 
       
 
-      <!-- Tabla detallada de evacuaciones -->
-      <div class="tabla-container">
-        <h3>Detalle por zona</h3>
-        <table class="tabla-evacuaciones" *ngIf="evacuaciones.length > 0">
-          <thead>
-            <tr>
-              <th>Zona</th>
-              <th>Personas</th>
-              <th>Prioridad</th>
-              <!-- Estado y Avance eliminados -->
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let evac of evacuaciones">
-              <td><strong>{{ evac.zona }}</strong></td>
-              <td>{{ evac.totalPersonas }}</td>
-              <td>
-                <span class="chip" [style.background]="getPrioridadColor(evac.prioridad)">
-                  {{ evac.prioridad }}
-                </span>
-              </td>
-              <!-- Estado y Avance eliminados -->
-            </tr>
-          </tbody>
-        </table>
-        <p *ngIf="evacuaciones.length === 0" class="sin-datos">No hay evacuaciones registradas</p>
+      <!-- Gráfico de pastel: Personas evacuadas por zona -->
+      <div class="pie-section">
+        <h3>Personas evacuadas por zona</h3>
+
+        <div *ngIf="evacuaciones.length > 0 && totalPersonasEvacuadas > 0; else sinDatosEvac">
+          <div class="pie-layout">
+            <div class="pie-wrapper">
+              <div class="pie" [style.background]="pieGradient"></div>
+              <div class="pie-center">
+                <div class="pie-total">{{ totalPersonasEvacuadas }}</div>
+                <div class="pie-label">Personas</div>
+              </div>
+            </div>
+
+            <ul class="pie-legend">
+              <li *ngFor="let item of pieLegend">
+                <span class="swatch" [style.background]="item.color"></span>
+                <span class="legend-label">{{ item.label }}</span>
+                <span class="legend-spacer"></span>
+                <span class="legend-value">{{ item.value }}</span>
+                <span class="legend-percent">({{ item.percent }}%)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <ng-template #sinDatosEvac>
+          <p class="sin-datos">No hay evacuaciones registradas</p>
+        </ng-template>
       </div>
     </section>
 

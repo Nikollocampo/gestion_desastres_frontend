@@ -47,6 +47,14 @@ export class ReportesEstadisticasPage implements OnInit {
   distribuidosPorUbicacion: { nombre: string; cantidad: number; porcentaje: number }[] = [];
   evacuacionesPorPrioridad: { prioridad: string; cantidad: number; porcentaje: number }[] = [];
 
+  // Pastel por zona (sin dependencias externas)
+  pieGradient = '';
+  pieLegend: { label: string; value: number; color: string; percent: number }[] = [];
+  private piePalette: string[] = [
+    '#5C6BC0', '#42A5F5', '#26A69A', '#9CCC65', '#FFCA28', '#EF5350',
+    '#AB47BC', '#8D6E63', '#29B6F6', '#66BB6A', '#FF7043', '#7E57C2', '#26C6DA'
+  ];
+
   constructor(
     private recursosService: RecursosService,
     private operadorService: OperadorService,
@@ -207,6 +215,9 @@ export class ReportesEstadisticasPage implements OnInit {
       const ib = orden.indexOf(b.prioridad);
       return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
     });
+
+    // Actualizar gráfico de pastel por zona
+    this.actualizarPiePorZona();
   }
 
   private parseEvacuacion(s: string): any {
@@ -259,5 +270,40 @@ export class ReportesEstadisticasPage implements OnInit {
 
   refrescar() {
     this.cargarEstadisticas();
+  }
+
+  private actualizarPiePorZona() {
+    const total = this.evacuaciones.reduce((acc, e) => acc + (e.totalPersonas || 0), 0);
+    if (total <= 0) {
+      this.pieGradient = '';
+      this.pieLegend = [];
+      return;
+    }
+
+    // Agrupar por zona
+    const porZona: { [zona: string]: number } = {};
+    for (const e of this.evacuaciones) {
+      const zona = (e.zona || 'Sin zona').trim();
+      porZona[zona] = (porZona[zona] || 0) + (e.totalPersonas || 0);
+    }
+
+    const items = Object.keys(porZona).map((label, idx) => {
+      const value = porZona[label];
+      const percent = Math.round((value / total) * 100);
+      const color = this.piePalette[idx % this.piePalette.length];
+      return { label, value, percent, color };
+    }).sort((a, b) => b.value - a.value);
+
+    this.pieLegend = items;
+
+    // Construir conic-gradient
+    let start = 0;
+    const segments: string[] = [];
+    for (const it of items) {
+      const end = start + (it.value / total) * 100;
+      segments.push(`${it.color} ${start}% ${end}%`);
+      start = end;
+    }
+    this.pieGradient = `conic-gradient(${segments.join(', ')})`;
   }
 }
